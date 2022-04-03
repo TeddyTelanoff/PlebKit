@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum World: ushort
 {
@@ -22,6 +23,11 @@ public class GameLogic: MonoBehaviour
         }
     }
 
+    [Header("Activity Stuff")]
+    public string[] activityNames;
+    public GameObject activityButton;
+    public Text activityText;
+
     [Header("World")]
     public GameObject[] worlds;
     
@@ -37,5 +43,9 @@ public class GameLogic: MonoBehaviour
     public void SwitchWorlds(World oldWorld, World newWorld) {
         worlds[(ushort) oldWorld].SetActive(false);
         worlds[(ushort) newWorld].SetActive(true);
+    }
+
+    public void DoActivity() {
+        Player.localPlayer.GetComponent<PlayerActivity>().DoActivity();
     }
 }

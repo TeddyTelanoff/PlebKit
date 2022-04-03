@@ -5,6 +5,7 @@ using RiptideNetworking;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerQuiz))]
 public class Player: MonoBehaviour
 {
 	public static readonly Dictionary<ushort, Player> players = new Dictionary<ushort, Player>();
@@ -12,13 +13,18 @@ public class Player: MonoBehaviour
 	public ushort id { get; private set; }
 	public string username { get; private set; }
 
+	public int bait;
+
 	public World world;
 	public PlayerMovement movement;
+	public PlayerQuiz quiz;
 	public PlayerUI ui;
 
 	void OnValidate() {
 		if (movement == null)
 			movement = GetComponent<PlayerMovement>();
+		if (quiz == null)
+			quiz = GetComponent<PlayerQuiz>();
 	}
 
 	void OnDestroy() {
@@ -86,5 +92,20 @@ public class Player: MonoBehaviour
 			player.transform.position = msg.GetVector3();
 			player.SendPosition();
 		}
+	}
+
+	[MessageHandler((ushort) ClientToServerId.Quiz)]
+	static void Quiz(ushort client, Message msg) {
+		if (players.TryGetValue(client, out Player player))
+		{
+			player.quiz.NewQuestion();
+			player.quiz.SendQuestion();
+		}
+	}
+
+	[MessageHandler((ushort) ClientToServerId.QuizGuess)]
+	static void QuizGuess(ushort client, Message msg) {
+		if (players.TryGetValue(client, out Player player))
+			player.quiz.Guess(msg.GetInt());
 	}
 }

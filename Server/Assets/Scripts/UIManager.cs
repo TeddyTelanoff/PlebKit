@@ -12,5 +12,7 @@ public class UIManager: MonoBehaviour
 		// player player player player .....
 		foreach (Player player in Player.players.Values)
 			player.SwitchWorldsAndSend(World.Pier);
+
+		GameLogic.instance.spawnWorld = World.Pier;
 	}
 }

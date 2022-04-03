@@ -1324,6 +1324,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerList: {fileID: 959047897}
   spawnWorld: 0
+  questions:
+  - prompt: Who has better YouTube channel?
+    choices:
+    - BlahFromAbove
+    - Treidex
+    - Glitch Hacker
+    - ContrastXD
+    answer: 1
   playerPrefab: {fileID: 8198207113296581018, guid: 4e0178da42db0064a8897f1e387e9a74, type: 3}
   playerUIPrefab: {fileID: 2432525957383063574, guid: 05246ba297544a8489a70c0ceca58db4, type: 3}
 --- !u!114 &1990238305

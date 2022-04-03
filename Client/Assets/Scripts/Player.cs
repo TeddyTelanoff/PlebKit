@@ -21,6 +21,7 @@ public class Player: MonoBehaviour
 
 	void OnDestroy() {
 		players.Remove(id);
+		GameLogic.instance.activityButton.SetActive(false);
 	}
 
 	void Move(Vector3 newPos) {
@@ -35,6 +36,8 @@ public class Player: MonoBehaviour
 			localPlayer = player;
 			player.isLocal = true;
 			player.movement.speed = speed;
+			GameLogic.instance.activityButton.SetActive(false);
+			GameLogic.instance.SwitchWorlds(World.Lobby, world);
 		}
 		else
 		{

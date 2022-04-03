@@ -9,12 +9,16 @@ public enum ServerToClientId: ushort
 	SpawnPlayer = 1,
 	PlayerPosition,
 	SwitchWorlds,
+	Question,
+	QuestionFeedback,
 }
 
 public enum ClientToServerId: ushort
 {
 	Name = 1,
 	PlayerPosition,
+	Quiz,
+	QuizGuess,
 }
 
 public class NetworkManager: MonoBehaviour

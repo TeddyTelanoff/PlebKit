@@ -24,6 +24,8 @@ public class GameLogic: MonoBehaviour
     public Transform playerList;
     public World spawnWorld;
 
+    public Question[] questions;
+
     [Header("Prefabs")]
     public GameObject playerPrefab;
     public GameObject playerUIPrefab;
