@@ -8,6 +8,8 @@ public class PlayerMovement: MonoBehaviour
 	public float speed;
 	bool[] inputs;
 
+	public bool idle;
+
 	[SerializeField]
 	Rigidbody rb;
 
@@ -29,6 +31,9 @@ public class PlayerMovement: MonoBehaviour
 	}
 
 	void FixedUpdate() {
+		if (idle)
+			return;
+
 		Move();
 		SendPosition();
 		

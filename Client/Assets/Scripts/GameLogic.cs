@@ -50,9 +50,8 @@ public class GameLogic: MonoBehaviour
         worlds[(ushort) newWorld].SetActive(true);
     }
 
-    public void DoActivity() {
+    public void DoActivity() =>
         Player.localPlayer.GetComponent<PlayerActivity>().DoActivity();
-    }
 
     public void QuizGuess(int guess) =>
         Player.localPlayer.GetComponent<PlayerQuiz>().Guess(guess);

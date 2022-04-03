@@ -6,12 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerActivity))]
 public class PlayerQuiz: MonoBehaviour
 {
-	public Player player;
-
-	void OnValidate() {
-		if (player == null)
-			player = GetComponent<Player>();
-	}
+	public Question question;
 
 	public void Guess(int guess) {
 		Message msg = Message.Create(MessageSendMode.reliable, ClientToServerId.QuizGuess);
@@ -24,7 +19,10 @@ public class PlayerQuiz: MonoBehaviour
 	[MessageHandler((ushort) ServerToClientId.Question)]
 	static void Question(Message msg) {
 		GameLogic.instance.quizScreen.gameObject.SetActive(true);
-		GameLogic.instance.quizScreen.DisplayQuestion(new Question(msg.GetString(), msg.GetStrings()));
+		
+		var question = new Question(msg.GetString(), msg.GetStrings());
+		Player.localPlayer.GetComponent<PlayerQuiz>().question = question;
+		GameLogic.instance.quizScreen.DisplayQuestion(question);
 	}
     
 	[MessageHandler((ushort) ServerToClientId.QuestionFeedback)]
@@ -32,7 +30,8 @@ public class PlayerQuiz: MonoBehaviour
 		GameLogic.instance.quizFeedbackScreen.gameObject.SetActive(true);
 		int answer = msg.GetInt();
 		int updatedBait = msg.GetInt();
-		GameLogic.instance.quizFeedbackScreen.DisplayFeedback(answer, updatedBait - Player.localPlayer.bait);
+		GameLogic.instance.quizFeedbackScreen.DisplayFeedback(Player.localPlayer.GetComponent<PlayerQuiz>().question.choices[answer],
+															  updatedBait - Player.localPlayer.bait);
 
 		Player.localPlayer.bait = updatedBait;
 	}

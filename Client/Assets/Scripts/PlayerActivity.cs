@@ -9,14 +9,22 @@ public enum Activity
     Quiz,
 }
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerActivity : MonoBehaviour
 {
+    public PlayerMovement playerMovement;
+    
     [SerializeField]
     GameObject activityButton;
     [SerializeField]
     Text activityText;
     
     public Activity activity { get; private set; }
+
+    void OnValidate() {
+        if (playerMovement == null)
+            playerMovement = GetComponent<PlayerMovement>();
+    }
 
     void Awake() {
         activityButton = GameLogic.instance.activityButton;
@@ -32,6 +40,7 @@ public class PlayerActivity : MonoBehaviour
 
     public void DoActivity() {
         activityButton.SetActive(false);
+        playerMovement.idle = true;
         
         switch (activity)
         {
@@ -45,4 +54,10 @@ public class PlayerActivity : MonoBehaviour
         Message msg = Message.Create(MessageSendMode.reliable, ClientToServerId.Quiz);
         NetworkManager.instance.client.Send(msg);
     }
+    
+    public void FinishActivity() {
+        playerMovement.idle = false;
+        activityButton.SetActive(activity != Activity.None);
+    }
+    
 }

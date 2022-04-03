@@ -1160,7 +1160,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 510321998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1731914214}
+        m_TargetAssemblyTypeName: QuizFeedbackScreen, Assembly-CSharp
+        m_MethodName: NextQustion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &510321998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,7 +2529,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1252572053}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1731914214}
+        m_TargetAssemblyTypeName: QuizFeedbackScreen, Assembly-CSharp
+        m_MethodName: ViewCorrectAnswer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1252572053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2981,7 +3005,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1455837502}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1731914214}
+        m_TargetAssemblyTypeName: QuizFeedbackScreen, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1455837502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3142,10 +3178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549e3624b6892434b8ee36ffe7061f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightColor: {r: 0.41960788, g: 1, b: 0.44862744, a: 0}
-  wrongColor: {r: 1, g: 0.41960785, b: 0.41960785, a: 0}
+  rightColor: {r: 0.41960788, g: 1, b: 0.44862744, a: 1}
+  wrongColor: {r: 1, g: 0.41960785, b: 0.41960785, a: 1}
   feedbackPanel: {fileID: 1405251963}
   feedbackText: {fileID: 1075085438}
+  viewCorrectAnswerButton: {fileID: 1252572050}
+  answer: 
 --- !u!1 &1752665103
 GameObject:
   m_ObjectHideFlags: 0
