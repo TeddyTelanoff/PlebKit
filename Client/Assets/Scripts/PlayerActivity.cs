@@ -36,7 +36,6 @@ public class PlayerActivity : MonoBehaviour
         switch (activity)
         {
         case Activity.Quiz:
-            // todo do quiz
             SendDoQuiz();
             break;
         }
@@ -45,13 +44,5 @@ public class PlayerActivity : MonoBehaviour
     public void SendDoQuiz() {
         Message msg = Message.Create(MessageSendMode.reliable, ClientToServerId.Quiz);
         NetworkManager.instance.client.Send(msg);
-    }
-    
-    [MessageHandler((ushort) ServerToClientId.Question)]
-    static void Question(Message msg) {
-        print(msg.GetString());
-        string[] choices = msg.GetStrings();
-        for (int i = 0; i < choices.Length; i++)
-            print($"{(char) (65 + i)}. {choices[i]}");
     }
 }

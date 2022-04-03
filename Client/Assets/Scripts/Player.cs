@@ -14,6 +14,8 @@ public class Player: MonoBehaviour
 
 	public string username { get; private set; }
 
+	public int bait;
+
 	[SerializeField]
 	PlayerMovement movement;
 

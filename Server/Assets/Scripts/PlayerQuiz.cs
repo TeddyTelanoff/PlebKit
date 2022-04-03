@@ -52,6 +52,7 @@ public class PlayerQuiz: MonoBehaviour
 	}
 
 	void SendFeedback() {
+		print("hola");
 		Message msg = Message.Create(MessageSendMode.reliable, ServerToClientId.QuestionFeedback);
 		msg.AddInt(question.answer);
 		msg.AddInt(player.bait);

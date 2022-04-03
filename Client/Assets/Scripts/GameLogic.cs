@@ -1,3 +1,5 @@
+using RiptideNetworking;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +30,9 @@ public class GameLogic: MonoBehaviour
     public GameObject activityButton;
     public Text activityText;
 
+    public QuizScreen quizScreen;
+    public QuizFeedbackScreen quizFeedbackScreen;
+
     [Header("World")]
     public GameObject[] worlds;
     
@@ -48,4 +53,7 @@ public class GameLogic: MonoBehaviour
     public void DoActivity() {
         Player.localPlayer.GetComponent<PlayerActivity>().DoActivity();
     }
+
+    public void QuizGuess(int guess) =>
+        Player.localPlayer.GetComponent<PlayerQuiz>().Guess(guess);
 }
