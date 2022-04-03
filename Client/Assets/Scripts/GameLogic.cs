@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum World: ushort
+{
+    Lobby,
+    Pier,
+}
+
 public class GameLogic: MonoBehaviour
 {
     private static GameLogic _instance;
@@ -16,11 +22,20 @@ public class GameLogic: MonoBehaviour
         }
     }
 
+    [Header("World")]
+    public GameObject[] worlds;
+    
     [Header("Prefabs")]
     public GameObject localPlayerPrefab;
     public GameObject otherPlayerPrefab;
 
     void Awake() {
         instance = this;
+    }
+
+    // todo more code
+    public void SwitchWorlds(World oldWorld, World newWorld) {
+        worlds[(ushort) oldWorld].SetActive(false);
+        worlds[(ushort) newWorld].SetActive(true);
     }
 }

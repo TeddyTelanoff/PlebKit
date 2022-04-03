@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum World: ushort
+{
+    Lobby,
+    Pier,
+}
+
 public class GameLogic: MonoBehaviour
 {
     private static GameLogic _instance;
@@ -15,8 +21,16 @@ public class GameLogic: MonoBehaviour
         }
     }
 
+    public Transform playerList;
+    public World spawnWorld;
+
     [Header("Prefabs")]
     public GameObject playerPrefab;
+    public GameObject playerUIPrefab;
+
+    void OnValidate() {
+        spawnWorld = World.Lobby;
+    }
 
     void Awake() {
         instance = this;

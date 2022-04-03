@@ -71,4 +71,5 @@ public static class MessageExtensions
         return new Quaternion(message.GetFloat(), message.GetFloat(), message.GetFloat(), message.GetFloat());
     }
     #endregion
+
 }

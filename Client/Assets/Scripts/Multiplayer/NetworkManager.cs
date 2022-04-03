@@ -7,13 +7,14 @@ using UnityEngine;
 public enum ServerToClientId: ushort
 {
 	SpawnPlayer = 1,
-	PlayerMovement,
+	PlayerPosition,
+	SwitchWorlds,
 }
 
 public enum ClientToServerId: ushort
 {
 	Name = 1,
-	Input,
+	PlayerPosition,
 }
 
 public class NetworkManager: MonoBehaviour
@@ -44,7 +45,7 @@ public class NetworkManager: MonoBehaviour
 	}
 
 	void Start() {
-		RiptideLogger.Initialize(Debug.Log,Debug.Log, Debug.LogWarning, Debug.LogError, true);
+		RiptideLogger.Initialize(Debug.Log,Debug.Log, Debug.LogWarning, Debug.LogError, false);
 
 		client = new Client();
 		client.Connected += OnConnect;
