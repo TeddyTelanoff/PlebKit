@@ -2,101 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bec42982-0460-4321-991d-ed47d5531c60" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials/Grass.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials/Grass.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials/Local Player.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials/Local Player.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials/Other Player.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Materials/Other Player.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Models.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Models/Pier.blend" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Models/Pier.blend.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Physics Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Physics Materials/NoFriction.physicMaterial" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Physics Materials/NoFriction.physicMaterial.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Local Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Local Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Other Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Other Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scenes.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scenes.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/ActivityArea.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/ActivityArea.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/GameLogic.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/GameLogic.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/MessageExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/MessageExtensions.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/NetworkManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/NetworkManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/RiptideNetworking.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/RiptideNetworking.dll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/RiptideNetworking.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Multiplayer/RiptideNetworking.xml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerActivity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerActivity.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerMovement.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerMovement.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerQuiz.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerQuiz.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Question.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Question.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizFeedbackScreen.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizFeedbackScreen.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizScreen.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizScreen.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/UIManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/UIManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/ProjectSettings/DynamicsManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player UI.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player UI.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameLogic.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameLogic.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/MessageExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/MessageExtensions.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/NetworkManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/NetworkManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/RiptideNetworking.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/RiptideNetworking.dll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/RiptideNetworking.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Multiplayer/RiptideNetworking.xml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerFish.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerFish.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerQuiz.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerQuiz.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Question.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Question.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Client.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649097257228</updated>
-      <workItem from="1649097270123" duration="2978000" />
+      <workItem from="1649097270123" duration="5056000" />
     </task>
     <servers />
   </component>
