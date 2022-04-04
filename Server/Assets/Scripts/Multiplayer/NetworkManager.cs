@@ -9,6 +9,7 @@ public enum ServerToClientId: ushort
 	SwitchWorlds,
 	Question,
 	QuestionFeedback,
+	UpdateResources,
 }
 
 public enum ClientToServerId: ushort
@@ -17,6 +18,7 @@ public enum ClientToServerId: ushort
 	PlayerPosition,
 	Quiz,
 	QuizGuess,
+	Fish,
 }
 
 public class NetworkManager: MonoBehaviour

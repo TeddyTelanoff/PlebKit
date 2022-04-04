@@ -6,6 +6,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerQuiz))]
+[RequireComponent(typeof(PlayerFish))]
 public class Player: MonoBehaviour
 {
 	public static readonly Dictionary<ushort, Player> players = new Dictionary<ushort, Player>();
@@ -13,11 +14,10 @@ public class Player: MonoBehaviour
 	public ushort id { get; private set; }
 	public string username { get; private set; }
 
-	public int bait;
-
 	public World world;
 	public PlayerMovement movement;
 	public PlayerQuiz quiz;
+	public PlayerFish fish;
 	public PlayerUI ui;
 
 	void OnValidate() {

@@ -5,7 +5,7 @@ public class ActivityArea: MonoBehaviour
 {
 	[SerializeField]
 	Activity activity;
-	
+
 	void OnTriggerEnter(Collider other) {
 		if (other.TryGetComponent(out PlayerActivity playerActivity))
 			playerActivity.SwitchActivity(activity);

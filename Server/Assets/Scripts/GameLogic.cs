@@ -26,6 +26,8 @@ public class GameLogic: MonoBehaviour
 
     public Question[] questions;
 
+    public float[] fishSpeciesValue;
+
     [Header("Prefabs")]
     public GameObject playerPrefab;
     public GameObject playerUIPrefab;

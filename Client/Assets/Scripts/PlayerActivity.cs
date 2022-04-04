@@ -7,6 +7,7 @@ public enum Activity
 {
     None,
     Quiz,
+    Fish,
 }
 
 [RequireComponent(typeof(PlayerMovement))]

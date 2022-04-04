@@ -52,18 +52,17 @@ public class PlayerQuiz: MonoBehaviour
 	}
 
 	void SendFeedback() {
-		print("hola");
 		Message msg = Message.Create(MessageSendMode.reliable, ServerToClientId.QuestionFeedback);
 		msg.AddInt(question.answer);
-		msg.AddInt(player.bait);
+		msg.AddInt(player.fish.bait);
 		NetworkManager.instance.server.Send(msg, player.id);
 	}
 
 	public void Guess(int guess) {
 		if (question.answer == guess)
-			player.bait++;
+			player.fish.bait++;
 		else
-			player.bait--;
+			player.fish.bait--;
 
 		SendFeedback();
 	}
