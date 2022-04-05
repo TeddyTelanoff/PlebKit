@@ -20,7 +20,7 @@ public class Client : MonoBehaviour
 		socket.OnClose += OnClose;
 		socket.OnError += OnError;
 		socket.OnMessage += OnMessage;
-		
+
 		socket.Connect();
 		print("connecting...");
 	}
@@ -36,13 +36,17 @@ public class Client : MonoBehaviour
 		socket.SendText("helllo meister");
 	}
 
-	void OnMessage(byte[] data) {
-		string str = Encoding.UTF8.GetString(data);
-		print($"server said {str}");
-		return;
-		
-		foreach (byte bite in data)
-			print(bite + ' ');
+	void OnMessage(byte[] bytes) {
+		Packet packet = new Packet(bytes);
+		ServerToClient id = (ServerToClient) packet.GetUShort();
+		switch (id)
+		{
+		case ServerToClient.Spawn:
+			string username = packet.GetString();
+			Vector3 spawnpoint = new Vector3(packet.GetFloat(), packet.GetFloat(), packet.GetFloat());
+			print($"name: {username}, spawnpoint: {spawnpoint}");
+			break;
+		}
 	}
 
 	void OnError(string err) {
