@@ -3,13 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="bec42982-0460-4321-991d-ed47d5531c60" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Local Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Local Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Other Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/Other Player.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/JoinScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/JoinScreen.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/Client.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" afterDir="false" />
     </list>
@@ -20,16 +23,22 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/8f/3664a532/MessageEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/ce/5ad43989/WebSocketServiceManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/bc/9c5627d2/Attribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/8a/bf279438/BitConverter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/2c/382b6fe4/RuntimeReflectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/1c/71889167/CustomAttributeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/63/f573a271/WebSocketSessionManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/5f/889e208a/WebSocketServer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/02/862d469c/RuntimeHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/c8/8e56d903/WebSocketServiceHost.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/ce/5ad43989/WebSocketServiceManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/26/35fec7aa/Ext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/ce/9537ccf0/WebSocketBehavior.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/eb/50c5f298/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/cb/4aa10e7c/IWebSocketSession.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/c9/1b39b95c/Marshal.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/3c/da464b90/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0afd6b20ac754e80abd9e76ad5c18e70363d28/d7/2ff25c96/TcpListener.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/38d3cef14c5a4fc9a92de0991034bc1a3d200/c8/8e56d903/WebSocketServiceHost.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -81,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649097257228</updated>
       <workItem from="1649097270123" duration="13800000" />
-      <workItem from="1649175073606" duration="6001000" />
+      <workItem from="1649175073606" duration="12707000" />
     </task>
     <servers />
   </component>

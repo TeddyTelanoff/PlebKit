@@ -1,4 +1,4 @@
-using System.Text;
+using PacketExt;
 
 using NativeWebSocket;
 
@@ -51,7 +51,7 @@ public class Client : MonoBehaviour
 		{
 		case ServerToClient.Spawn:
 			string username = packet.GetString();
-			Vector3 spawnpoint = new Vector3(packet.GetFloat(), packet.GetFloat(), packet.GetFloat());
+			Vector3 spawnpoint = packet.GetVector3();
 			print($"{username} spawned!, spawnpoint: {spawnpoint}");
 			break;
 		}

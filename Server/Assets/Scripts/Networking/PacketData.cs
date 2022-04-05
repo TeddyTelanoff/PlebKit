@@ -6,4 +6,5 @@
 public enum ClientToServer: ushort
 {
 	Join,
+	Position,
 }
