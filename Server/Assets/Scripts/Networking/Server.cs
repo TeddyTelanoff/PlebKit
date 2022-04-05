@@ -11,7 +11,7 @@ public class Server: MonoBehaviour
 	public int port;
 
 	public WebSocketServer server;
-	
+
 	void Start() {
 		server = new WebSocketServer(port);
 		server.AddWebSocketService<ServerBehavior>("/");
@@ -31,18 +31,37 @@ public class Server: MonoBehaviour
 		protected override void OnOpen() {
 			clients.Add(ID, this);
 			
-			Packet packet = Packet.Create(ServerToClient.Spawn);
-			packet.AddString("jeff");
-			packet.AddFloat(0).AddFloat(2).AddFloat(4);
-			Send(packet);
+			
 		}
 
-		protected override void OnMessage(MessageEventArgs e) =>
-			print($"someone said {e.Data}!");
+		protected override void OnMessage(MessageEventArgs e) {
+			Packet packet = new Packet(e.RawData);
+			ClientToServer id = (ClientToServer) packet.GetUShort();
+			switch (id)
+			{
+			case ClientToServer.Join:
+				PlayerJoined(packet);
+				break;
+			}
+		}
 
 		public void Send(Packet packet) {
 			packet.MakeReadable();
 			Send(packet.readBuffer);
+		}
+
+		void PlayerJoined(Packet packet) {
+			string username = packet.GetString();
+			if (username.IsNullOrEmpty())
+				username = "Guest " + ID;
+			
+			print($"{username} joined!");
+			
+			// send spawn
+			packet = Packet.Create(ServerToClient.Spawn);
+			packet.AddString(username);
+			packet.AddFloat(0).AddFloat(2).AddFloat(4);
+			Send(packet);
 		}
 	}
 }

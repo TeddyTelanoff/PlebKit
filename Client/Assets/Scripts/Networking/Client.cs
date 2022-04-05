@@ -9,20 +9,28 @@ public class Client : MonoBehaviour
 	public static Client instance;
 	
 	public WebSocket socket;
+	public int port;
 
 	void Awake() {
 		instance = this;
 	}
 
 	void Start() {
-		socket = new WebSocket("ws://localhost:62490/");
+		socket = new WebSocket($"ws://localhost:{port}/");
 		socket.OnOpen += OnOpen;
 		socket.OnClose += OnClose;
 		socket.OnError += OnError;
 		socket.OnMessage += OnMessage;
+	}
 
+	public void Connect() {
 		socket.Connect();
 		print("connecting...");
+	}
+
+	public void Send(Packet packet) {
+		packet.MakeReadable();
+		socket.Send(packet.readBuffer);
 	}
 
 #if !UNITY_WEBGL || UNITY_EDITOR
@@ -33,7 +41,7 @@ public class Client : MonoBehaviour
 
 	void OnOpen() {
 		print("socket open");
-		socket.SendText("helllo meister");
+		JoinScreen.instance.SendJoin();
 	}
 
 	void OnMessage(byte[] bytes) {
@@ -44,7 +52,7 @@ public class Client : MonoBehaviour
 		case ServerToClient.Spawn:
 			string username = packet.GetString();
 			Vector3 spawnpoint = new Vector3(packet.GetFloat(), packet.GetFloat(), packet.GetFloat());
-			print($"name: {username}, spawnpoint: {spawnpoint}");
+			print($"{username} spawned!, spawnpoint: {spawnpoint}");
 			break;
 		}
 	}
