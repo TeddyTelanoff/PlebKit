@@ -3,26 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="bec42982-0460-4321-991d-ed47d5531c60" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/.signature.p7s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/WebSocketSharp.1.0.3-rc11.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/WebSocketSharp.1.0.3-rc11.nupkg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/lib.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/lib/websocket-sharp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/lib/websocket-sharp.dll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/lib/websocket-sharp.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/WebSocketSharp.1.0.3-rc11/lib/websocket-sharp.xml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/ClientID.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/ClientID.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketHandling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketHandling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Packet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketExt.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketExt.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/packages.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9d552c66fce840f3be4d05894c77e551576390/80/3cc6467c/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
@@ -99,7 +98,7 @@
       <workItem from="1649097270123" duration="13800000" />
       <workItem from="1649175073606" duration="12946000" />
       <workItem from="1649260604826" duration="934000" />
-      <workItem from="1649278271571" duration="1752000" />
+      <workItem from="1649278271571" duration="3326000" />
     </task>
     <servers />
   </component>

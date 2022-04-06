@@ -1,9 +1,9 @@
-﻿public enum ServerToClient: ushort
+﻿public enum ServerToClient: short
 {
 	Spawn,
 }
 
-public enum ClientToServer: ushort
+public enum ClientToServer: short
 {
 	Join,
 	Position,

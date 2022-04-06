@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-
-using PacketExt;
 
 using UnityEngine;
 
@@ -68,7 +65,7 @@ public class Server: MonoBehaviour
 
 	[PacketHandler(ClientToServer.Join)]
 	static void PlayerJoined(int client, Packet packet) {
-		string username = packet.GetString();
+		string username = packet.ReadString();
 		if (string.IsNullOrEmpty(username))
 			username = "Guest " + client;
 			
@@ -78,9 +75,9 @@ public class Server: MonoBehaviour
 	}
 
 	static void SendSpawn(string username, Vector3 where) {
-		Packet packet = Packet.Create(ServerToClient.Spawn);
-		packet.AddString(username);
-		packet.AddVector3(where);
+		using Packet packet = new Packet(ServerToClient.Spawn);
+		packet.Write(username);
+		packet.Write(where);
 		instance.SendAll(packet);
 	}
 }
