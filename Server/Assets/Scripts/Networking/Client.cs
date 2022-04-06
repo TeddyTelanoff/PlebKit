@@ -12,7 +12,7 @@ public class Client: MonoBehaviour
 {
 	public const int dataBufferSize = 4096;
 	
-	public int id;
+	public ushort id;
 
 	public TcpClient socket;
 	public NetworkStream stream;
@@ -132,12 +132,12 @@ public class Client: MonoBehaviour
 		}
 	}
 
-	byte[] DecodeMessage(byte[] data) {
-		bool fin = (data[0] & 0b10000000) != 0;
-		bool mask = (data[0] & 0b10000000) != 0;
+	byte[] DecodeMessage(byte[] bytes) {
+		bool fin = (bytes[0] & 0b10000000) != 0;
+		bool mask = (bytes[1] & 0b10000000) != 0;
 
-		int opcode = data[0] & 0b00001111;
-		int msglen = data[1] & 0b01111111;
+		int opcode = bytes[0] & 0b00001111;
+		int msglen = bytes[1] & 0b01111111;
 		int offset = 2;
 
 		if (msglen == 126 || msglen == 127)
@@ -146,15 +146,34 @@ public class Client: MonoBehaviour
 		if (mask)
 		{
 			byte[] decoded = new byte[msglen];
-			byte[] masks = new byte[4] { data[offset], data[offset + 1], data[offset + 2], data[offset + 3] };
+			byte[] masks = new byte[4] { bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3] };
 			offset += 4;
 			
 			for (int i = 0; i < msglen; i++)
-				decoded[i] = (byte)(data[offset + i] ^ masks[i % 4]);
+				decoded[i] = (byte) (bytes[offset + i] ^ masks[i % 4]);
 
 			return decoded;
 		}
 		
 		throw new Exception("mask bit not set");
+	}
+
+	public void Send(byte[] data) {
+		byte[] frame = MakeFrame(data);
+		stream.WriteAsync(frame, 0, frame.Length);
+	}
+
+	// what's this "hard coding" ur speaking of??
+	byte[] MakeFrame(byte[] data) {
+		if (data.Length > 0b01111111)
+			throw new Exception("teddy code bad hehehehaw"); // if I get this exception, I need to impl fragmentation
+		
+		byte[] bytes = new byte[data.Length + 2];
+		bytes[0] = 0b10000010; // fin bit + opcode 2
+		bytes[1] = (byte) data.Length;
+		
+		Array.Copy(data, 0, bytes, 2, data.Length);
+
+		return bytes;
 	}
 }

@@ -17,7 +17,7 @@ public class PacketHandlerAttribute: Attribute
 
 public static class PacketHandling
 {
-	public delegate void PacketHandler(int client, Packet packet);
+	public delegate void PacketHandler(ushort client, Packet packet);
 	
 	public static Dictionary<ClientToServer, PacketHandler> handlers;
 

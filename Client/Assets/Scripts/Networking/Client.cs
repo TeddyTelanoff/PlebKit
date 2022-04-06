@@ -49,6 +49,7 @@ public class Client : MonoBehaviour
 	void OnMessage(byte[] bytes) {
 		Packet packet = new Packet(bytes);
 		ServerToClient id = (ServerToClient) packet.GetUShort();
+		
 		switch (id)
 		{
 		case ServerToClient.Spawn:

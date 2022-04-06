@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 using PacketExt;
 
@@ -31,7 +32,7 @@ public class Server: MonoBehaviour
 		tcpListener.Start();
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
-		for (ushort i = 0; i <= maxClients; i++)
+		for (ushort i = 1; i <= maxClients; i++)
 		{
 			Client client = Instantiate(clientPrefab).GetComponent<Client>();
 			client.id = i;
@@ -45,7 +46,7 @@ public class Server: MonoBehaviour
 		TcpClient client = tcpListener.EndAcceptTcpClient(result);
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
-		for (ushort i = 0; i <= maxClients; i++)
+		for (ushort i = 1; i <= maxClients; i++)
 			if (clients[i].socket == null)
 			{
 				ThreadManager.ExecuteOnMainThread(() => {
@@ -64,18 +65,18 @@ public class Server: MonoBehaviour
 
 	public void Send(Packet packet, ushort client) {
 		packet.MakeReadable();
-		clients[client].stream.BeginWrite(packet.readBuffer, 0, packet.readBuffer.Length, null, null);
+		clients[client].Send(packet.readBuffer);
 	}
 
 	public void SendAll(Packet packet, ushort except = 0) {
 		packet.MakeReadable();
-		for (ushort i = 0; i < maxClients; i++)
+		for (ushort i = 1; i <= maxClients; i++)
 			if (i != except && clients[i].socket != null)
-				clients[i].stream.BeginWrite(packet.readBuffer, 0, packet.readBuffer.Length, null, null);
+				clients[i].Send(packet.readBuffer);
 	}
 
 	[PacketHandler(ClientToServer.Join)]
-	static void PlayerJoined(int client, Packet packet) {
+	static void PlayerJoined(ushort client, Packet packet) {
 		string username = packet.GetString();
 		if (string.IsNullOrEmpty(username))
 			username = "Guest " + client;
