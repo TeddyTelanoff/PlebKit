@@ -66,5 +66,6 @@ public class Client : MonoBehaviour
 
 	void OnClose(WebSocketCloseCode code) {
 		print($"socket closed because: {code}");
+		JoinScreen.instance.BackToJoin();
 	}
 }

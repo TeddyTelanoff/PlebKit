@@ -60,6 +60,10 @@ public class Server: MonoBehaviour
 	}
 
 	void OnApplicationQuit() {
+		for (ushort i = 1; i <= maxClients; i++)
+			if (clients[i].socket != null)
+				clients[i].Disconnect();
+		
 		tcpListener.Stop();
 	}
 

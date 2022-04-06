@@ -29,7 +29,6 @@ public class Client: MonoBehaviour
 		receiveBuffer = new byte[dataBufferSize];
 
 		stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveHandshakeCallback, null);
-		handshakeDone = false;
 		print("client found");
 	}
 
@@ -38,7 +37,7 @@ public class Client: MonoBehaviour
 
 		if (len <= 0)
 		{
-			Disconnect(false);
+			Disconnect();
 			return;
 		}
 
@@ -69,11 +68,24 @@ public class Client: MonoBehaviour
 		stream.BeginWrite(response, 0, response.Length, null, null);
 	}
 
-	void Disconnect(bool sendHandshake = true) {
-		if (sendHandshake)
-			; // todo send closing handshake
-		
+	void ClosingHandshake() {
+		byte[] frame = new byte[2];
+		frame[0] = 0b10001000;
+		frame[1] = 0b00000000;
+
+		stream.Write(frame, 0, frame.Length);
+
 		socket.Close();
+		handshakeDone = false;
+		return;
+		stream.BeginRead(Array.Empty<byte>(), 0, 0, result => {
+														socket.Close();
+														handshakeDone = false;
+													}, null);
+	}
+
+	public void Disconnect() {
+		ClosingHandshake();
 		stream = null;
 		receiveBuffer = null;
 		socket = null;
@@ -165,7 +177,7 @@ public class Client: MonoBehaviour
 
 	// what's this "hard coding" ur speaking of??
 	byte[] MakeFrame(byte[] data) {
-		if (data.Length > 0b01111111)
+		if (data.Length > 125)
 			throw new Exception("teddy code bad hehehehaw"); // if I get this exception, I need to impl fragmentation
 		
 		byte[] bytes = new byte[data.Length + 2];
