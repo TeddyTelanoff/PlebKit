@@ -18,7 +18,7 @@ public class Server: MonoBehaviour
 
 	public TcpListener tcpListener;
 
-	public Dictionary<int, Client> clients = new Dictionary<int, Client>();
+	public Dictionary<ushort, Client> clients = new Dictionary<ushort, Client>();
 
 	void Awake() {
 		instance = this;
@@ -31,7 +31,7 @@ public class Server: MonoBehaviour
 		tcpListener.Start();
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
-		for (int i = 1; i <= maxClients; i++)
+		for (ushort i = 0; i <= maxClients; i++)
 		{
 			Client client = Instantiate(clientPrefab).GetComponent<Client>();
 			client.id = i;
@@ -45,7 +45,7 @@ public class Server: MonoBehaviour
 		TcpClient client = tcpListener.EndAcceptTcpClient(result);
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
-		for (int i = 1; i <= maxClients; i++)
+		for (ushort i = 0; i <= maxClients; i++)
 			if (clients[i].socket == null)
 			{
 				ThreadManager.ExecuteOnMainThread(() => {
@@ -62,10 +62,16 @@ public class Server: MonoBehaviour
 		tcpListener.Stop();
 	}
 
-	public void Send(Packet packet, int client) {
+	public void Send(Packet packet, ushort client) {
+		packet.MakeReadable();
+		clients[client].stream.BeginWrite(packet.readBuffer, 0, packet.readBuffer.Length, null, null);
 	}
 
-	public void SendAll(Packet packet, int except = 0) {
+	public void SendAll(Packet packet, ushort except = 0) {
+		packet.MakeReadable();
+		for (ushort i = 0; i < maxClients; i++)
+			if (i != except && clients[i].socket != null)
+				clients[i].stream.BeginWrite(packet.readBuffer, 0, packet.readBuffer.Length, null, null);
 	}
 
 	[PacketHandler(ClientToServer.Join)]

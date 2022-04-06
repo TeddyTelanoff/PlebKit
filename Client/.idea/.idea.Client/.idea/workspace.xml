@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="37de6820-69b2-4655-a80f-1f5347d47a14" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoinScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoinScreen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Prefabs/Client.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Prefabs/Client.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Packet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/PacketData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/PacketData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Server.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +70,7 @@
       <updated>1649098158676</updated>
       <workItem from="1649098164251" duration="7510000" />
       <workItem from="1649175101816" duration="8647000" />
-      <workItem from="1649283578717" duration="924000" />
+      <workItem from="1649283578717" duration="1431000" />
     </task>
     <servers />
   </component>
