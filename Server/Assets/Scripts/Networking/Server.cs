@@ -1,20 +1,25 @@
+using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 using PacketExt;
 
 using UnityEngine;
 
-using WebSocketSharp;
-using WebSocketSharp.Server;
-
 public class Server: MonoBehaviour
 {
 	public static Server instance;
+
+	public GameObject clientPrefab;
 	
+	public int maxClients;
 	public int port;
 
-	public WebSocketServer server;
+	public TcpListener tcpListener;
+
+	public Dictionary<int, Client> clients = new Dictionary<int, Client>();
 
 	void Awake() {
 		instance = this;
@@ -22,39 +27,49 @@ public class Server: MonoBehaviour
 
 	void Start() {
 		PacketHandling.MakeDictionary();
-		
-		server = new WebSocketServer(port);
-		server.AddWebSocketService<ServerBehavior>("/");
-		server.Start();
+
+		tcpListener = new TcpListener(IPAddress.Any, port);
+		tcpListener.Start();
+		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
+
+		for (int i = 1; i <= maxClients; i++)
+		{
+			Client client = Instantiate(clientPrefab).GetComponent<Client>();
+			client.id = i;
+			clients.Add(i, client);
+		}
+
 		print($"server active on port {port}");
 	}
 
-	void Update() {
-		if (Input.GetKeyDown(KeyCode.Space))
-			print(ServerBehavior.clients.Count);
+	void ConnectCallback(IAsyncResult result) {
+		TcpClient client = tcpListener.EndAcceptTcpClient(result);
+		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
+
+		for (int i = 1; i <= maxClients; i++)
+			if (clients[i].socket == null)
+			{
+				clients[i].Connect(client);
+				return;
+			}
+
+		// todo respond with server full
 	}
 
 	void OnApplicationQuit() {
-		server.Stop();
+		tcpListener.Stop();
 	}
 
-	public void Send(Packet packet, ClientID client) {
-		if (ServerBehavior.clients.TryGetValue(client, out ServerBehavior behavior))
-			behavior.Send(packet);
+	public void Send(Packet packet, int client) {
 	}
 
-	public void SendAll(Packet packet, ClientID except = ClientID.Nobody) {
-		foreach (ClientID client in ServerBehavior.clients.Keys)
-		{
-			if (client != except)
-				Send(packet, client);
-		}
+	public void SendAll(Packet packet, int except = 0) {
 	}
 
 	[PacketHandler(ClientToServer.Join)]
-	static void PlayerJoined(ClientID client, Packet packet) {
+	static void PlayerJoined(int client, Packet packet) {
 		string username = packet.GetString();
-		if (username.IsNullOrEmpty())
+		if (string.IsNullOrEmpty(username))
 			username = "Guest " + client;
 			
 		print($"{username} joined!");
@@ -67,45 +82,5 @@ public class Server: MonoBehaviour
 		packet.AddString(username);
 		packet.AddVector3(where);
 		instance.SendAll(packet);
-	}
-
-	public class ServerBehavior: WebSocketBehavior
-	{
-		// this lib is garbage, but it is only one out there so 😀🔫
-		public static Dictionary<ClientID, ServerBehavior> clients = new Dictionary<ClientID, ServerBehavior>();
-
-		public ClientID clientId;
-		
-		protected override void OnOpen() {
-			clientId = (ClientID) ID.GetHashCode();
-			lock (clients)
-			{
-				clients.Add(clientId, this);
-			}
-
-			print("client found");
-		}
-
-		protected override void OnMessage(MessageEventArgs e) {
-			print("we got a packet");
-			Packet packet = new Packet(e.RawData);
-			ClientToServer id = (ClientToServer) packet.GetUShort();
-			print($"got message #{id}");
-			PacketHandling.handlers[id].Invoke(clientId, packet);
-		}
-
-		protected override void OnClose(CloseEventArgs e) {
-			clients.Remove(clientId);
-		}
-
-		public void Send(Packet packet) {
-			packet.MakeReadable();
-			Send(packet.readBuffer);
-		}
-
-		public void Broadcast(Packet packet) {
-			packet.MakeReadable();
-			Sessions.Broadcast(packet.readBuffer);
-		}
 	}
 }
