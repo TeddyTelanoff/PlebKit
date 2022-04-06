@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,8 +16,8 @@ public class Client: MonoBehaviour
 
 	public TcpClient socket;
 	public NetworkStream stream;
-	public Packet receivedData;
 	public byte[] receiveBuffer;
+	public bool handshakeDone;
 
 	public void Connect(TcpClient client) {
 		socket = client;
@@ -24,10 +26,10 @@ public class Client: MonoBehaviour
 
 		stream = socket.GetStream();
 
-		receivedData = new Packet();
 		receiveBuffer = new byte[dataBufferSize];
 
 		stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveHandshakeCallback, null);
+		handshakeDone = false;
 		print("client found");
 	}
 
@@ -45,8 +47,8 @@ public class Client: MonoBehaviour
 
 		string str = Encoding.UTF8.GetString(data);
 		OpeningHandshake(str);
+		handshakeDone = true;
 		
-		// proceed to normal callback
 		stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
 	}
 
@@ -73,9 +75,31 @@ public class Client: MonoBehaviour
 		
 		socket.Close();
 		stream = null;
-		receivedData = null;
 		receiveBuffer = null;
 		socket = null;
+		
+		gameObject.SetActive(false);
+	}
+
+	void NotFixedUpdate() {
+		if (!stream.DataAvailable)
+			return;
+
+		if (!handshakeDone)
+			return;
+
+		if (socket.Available <= 0)
+			return;
+
+		byte[] data = new byte[socket.Available];
+		stream.Read(data, 0, socket.Available);
+		byte[] decoded = DecodeMessage(data);
+		
+		ThreadManager.ExecuteOnMainThread(() => {
+											  Packet packet = new Packet(decoded);
+											  ClientToServer packetId = (ClientToServer) packet.GetUShort();
+											  PacketHandling.handlers[packetId](id, packet);
+										  });
 	}
 
 	void ReceiveCallback(IAsyncResult result) {
@@ -84,12 +108,21 @@ public class Client: MonoBehaviour
 			int len = stream.EndRead(result);
 
 			if (len <= 0)
-				return; // todo disconnect
+			{
+				Disconnect();
+				return;
+			}
 
 			byte[] data = new byte[len];
 			Array.Copy(receiveBuffer, data, len);
 
-			receivedData.Reset(HandleData(data));
+			byte[] decoded = DecodeMessage(data);
+			ThreadManager.ExecuteOnMainThread(() => {
+												  Packet packet = new Packet(decoded);
+												  ClientToServer packetId = (ClientToServer) packet.GetUShort();
+												  PacketHandling.handlers[packetId](id, packet);
+											  });
+			
 			stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
 		}
 		catch (Exception e)
@@ -99,32 +132,29 @@ public class Client: MonoBehaviour
 		}
 	}
 
-	bool HandleData(byte[] data) {
-		int packetlen = 0;
-		
-		receivedData.SetBytes(data);
+	byte[] DecodeMessage(byte[] data) {
+		bool fin = (data[0] & 0b10000000) != 0;
+		bool mask = (data[0] & 0b10000000) != 0;
 
-		do
+		int opcode = data[0] & 0b00001111;
+		int msglen = data[1] & 0b01111111;
+		int offset = 2;
+
+		if (msglen == 126 || msglen == 127)
+			throw new Exception("teddy has incomplete code");
+
+		if (mask)
 		{
-			if (receivedData.UnreadLength() >= sizeof(int))
-			{
-				packetlen = receivedData.ReadInt();
+			byte[] decoded = new byte[msglen];
+			byte[] masks = new byte[4] { data[offset], data[offset + 1], data[offset + 2], data[offset + 3] };
+			offset += 4;
+			
+			for (int i = 0; i < msglen; i++)
+				decoded[i] = (byte)(data[offset + i] ^ masks[i % 4]);
 
-				if (packetlen <= 0)
-					return true;
-			}
-
-			byte[] packetBytes = receivedData.ReadBytes(packetlen);
-			using (Packet packet = new Packet(packetBytes))
-			{
-				ClientToServer packetId = (ClientToServer) packet.ReadShort();
-				PacketHandling.handlers[packetId](id, packet);
-			}
-		} while (packetlen > 0 && packetlen <= receivedData.UnreadLength());
-
-		if (packetlen <= 1)
-			return true;
+			return decoded;
+		}
 		
-		return false;
+		throw new Exception("mask bit not set");
 	}
 }

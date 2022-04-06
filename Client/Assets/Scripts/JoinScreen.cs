@@ -31,6 +31,5 @@ public class JoinScreen: MonoBehaviour
         Packet packet = Packet.Create(ClientToServer.Join);
         packet.AddString(usernameField.text);
         Client.instance.Send(packet);
-        print("we sent a join packet");
     }
 }

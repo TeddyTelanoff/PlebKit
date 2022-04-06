@@ -1,3 +1,5 @@
+using System.Text;
+
 using PacketExt;
 
 using NativeWebSocket;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
+using PacketExt;
+
 using UnityEngine;
 
 public class Server: MonoBehaviour
@@ -46,11 +48,14 @@ public class Server: MonoBehaviour
 		for (int i = 1; i <= maxClients; i++)
 			if (clients[i].socket == null)
 			{
-				clients[i].Connect(client);
+				ThreadManager.ExecuteOnMainThread(() => {
+													  clients[i].gameObject.SetActive(true);
+													  clients[i].Connect(client);
+												  });
 				return;
 			}
 
-		// todo respond with server full
+		// todo respond with: server full
 	}
 
 	void OnApplicationQuit() {
@@ -65,7 +70,7 @@ public class Server: MonoBehaviour
 
 	[PacketHandler(ClientToServer.Join)]
 	static void PlayerJoined(int client, Packet packet) {
-		string username = packet.ReadString();
+		string username = packet.GetString();
 		if (string.IsNullOrEmpty(username))
 			username = "Guest " + client;
 			
@@ -75,9 +80,9 @@ public class Server: MonoBehaviour
 	}
 
 	static void SendSpawn(string username, Vector3 where) {
-		using Packet packet = new Packet(ServerToClient.Spawn);
-		packet.Write(username);
-		packet.Write(where);
+		Packet packet = Packet.Create(ServerToClient.Spawn);
+		packet.AddString(username);
+		packet.AddVector3(where);
 		instance.SendAll(packet);
 	}
 }
