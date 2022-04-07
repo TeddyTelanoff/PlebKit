@@ -99,7 +99,16 @@ public class Client: MonoBehaviour
 
 	public void Disconnect() {
 		ClosingHandshake();
-		Destroy(gameObject);
+
+		ThreadManager.ExecuteOnMainThread(() => {
+											  lock (Server.instance.availableClientIds)
+											  {
+												  Server.instance.clients.Remove(id);
+												  Server.instance.availableClientIds.Push(id);
+											  }
+
+											  Destroy(gameObject);
+										  });
 	}
 
 	void NotFixedUpdate() {

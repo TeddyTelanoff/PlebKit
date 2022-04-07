@@ -12,5 +12,6 @@ public class PlayerMovement: MonoBehaviour
 	void SendPosition() {
 		Packet packet = Packet.Create(ClientToServer.Movement);
 		packet.AddVector3(transform.position);
+		Client.instance.Send(packet);
 	}
 }

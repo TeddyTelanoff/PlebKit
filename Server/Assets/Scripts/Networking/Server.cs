@@ -20,7 +20,7 @@ public class Server: MonoBehaviour
 	public TcpListener tcpListener;
 
 	public Dictionary<ushort, Client> clients = new Dictionary<ushort, Client>();
-	public List<ushort> availableClientIds;
+	public Stack<ushort> availableClientIds = new Stack<ushort>();
 
 	void Awake() {
 		instance = this;
@@ -34,7 +34,7 @@ public class Server: MonoBehaviour
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
 		for (ushort i = 1; i <= maxClients; i++)
-			availableClientIds.Add(i);
+			availableClientIds.Push(i);
 
 		print($"server active on port {port}");
 	}
@@ -43,19 +43,22 @@ public class Server: MonoBehaviour
 		TcpClient tcpClient = tcpListener.EndAcceptTcpClient(result);
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
-		for (ushort i = 1; i <= maxClients; i++)
-			if (clients[i].socket == null)
-			{
-				ThreadManager.ExecuteOnMainThread(() => {
-													  Client client = Instantiate(clientPrefab).GetComponent<Client>();
-													  client.id = i;
-													  clients.Add(i, client);
-													  client.Connect(tcpClient);
-												  });
-				return;
-			}
+		print($"connection?");
 
-		// todo respond with: server full
+		lock (availableClientIds)
+		{
+			if (availableClientIds.Count <= 0)
+				// todo respond with: server full
+				return;
+			
+			ushort id = availableClientIds.Pop();
+			ThreadManager.ExecuteOnMainThread(() => {
+												  Client client = Instantiate(clientPrefab).GetComponent<Client>();
+												  client.id = id;
+												  clients.Add(id, client);
+												  client.Connect(tcpClient);
+											  });
+		}
 	}
 
 	void OnApplicationQuit() {

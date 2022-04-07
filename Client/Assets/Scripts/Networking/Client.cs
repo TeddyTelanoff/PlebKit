@@ -20,6 +20,8 @@ public class Client : MonoBehaviour
 	}
 
 	void Start() {
+		PacketHandling.MakeDictionary();
+
 		socket = new WebSocket($"ws://localhost:{port}/");
 		socket.OnOpen += OnOpen;
 		socket.OnClose += OnClose;
@@ -51,7 +53,10 @@ public class Client : MonoBehaviour
 		Packet packet = new Packet(bytes);
 		ServerToClient packetId = (ServerToClient) packet.GetUShort();
 
-		PacketHandling.handlers[packetId](packet);
+		if (PacketHandling.handlers.TryGetValue(packetId, out PacketHandling.PacketHandler handler))
+			handler(packet);
+		else
+			print($"no handler for {packetId}");
 	}
 
 	void OnError(string err) {
@@ -64,8 +69,8 @@ public class Client : MonoBehaviour
 	}
 
 	[PacketHandler(ServerToClient.Welcome)]
-	void OnWelcome(Packet packet) {
-		clientId = packet.GetUShort();
+	static void OnWelcome(Packet packet) {
+		instance.clientId = packet.GetUShort();
 		JoinScreen.instance.SendJoin();
 	}
 }
