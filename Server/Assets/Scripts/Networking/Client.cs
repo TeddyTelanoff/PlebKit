@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using PacketExt;
+
 using UnityEngine;
 
 public class Client: MonoBehaviour
@@ -14,6 +16,8 @@ public class Client: MonoBehaviour
 	
 	public ushort id;
 
+	public Player player;
+	
 	public TcpClient socket;
 	public NetworkStream stream;
 	public byte[] receiveBuffer;
@@ -47,8 +51,17 @@ public class Client: MonoBehaviour
 		string str = Encoding.UTF8.GetString(data);
 		OpeningHandshake(str);
 		handshakeDone = true;
-		
+
+		SendWelcome();
+
 		stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+	}
+
+	void SendWelcome() {
+		Packet packet = Packet.Create(ServerToClient.Welcome);
+		packet.AddUShort(id);
+		packet.MakeReadable();
+		Send(packet.readBuffer);
 	}
 
 	void OpeningHandshake(string msg) {
@@ -86,11 +99,7 @@ public class Client: MonoBehaviour
 
 	public void Disconnect() {
 		ClosingHandshake();
-		stream = null;
-		receiveBuffer = null;
-		socket = null;
-		
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 
 	void NotFixedUpdate() {

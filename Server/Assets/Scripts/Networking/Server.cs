@@ -20,6 +20,7 @@ public class Server: MonoBehaviour
 	public TcpListener tcpListener;
 
 	public Dictionary<ushort, Client> clients = new Dictionary<ushort, Client>();
+	public List<ushort> availableClientIds;
 
 	void Awake() {
 		instance = this;
@@ -33,25 +34,23 @@ public class Server: MonoBehaviour
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
 		for (ushort i = 1; i <= maxClients; i++)
-		{
-			Client client = Instantiate(clientPrefab).GetComponent<Client>();
-			client.id = i;
-			clients.Add(i, client);
-		}
+			availableClientIds.Add(i);
 
 		print($"server active on port {port}");
 	}
 
 	void ConnectCallback(IAsyncResult result) {
-		TcpClient client = tcpListener.EndAcceptTcpClient(result);
+		TcpClient tcpClient = tcpListener.EndAcceptTcpClient(result);
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
 		for (ushort i = 1; i <= maxClients; i++)
 			if (clients[i].socket == null)
 			{
 				ThreadManager.ExecuteOnMainThread(() => {
-													  clients[i].gameObject.SetActive(true);
-													  clients[i].Connect(client);
+													  Client client = Instantiate(clientPrefab).GetComponent<Client>();
+													  client.id = i;
+													  clients.Add(i, client);
+													  client.Connect(tcpClient);
 												  });
 				return;
 			}
@@ -60,9 +59,8 @@ public class Server: MonoBehaviour
 	}
 
 	void OnApplicationQuit() {
-		for (ushort i = 1; i <= maxClients; i++)
-			if (clients[i].socket != null)
-				clients[i].Disconnect();
+		foreach (Client client in clients.Values)
+			client.Disconnect();
 		
 		tcpListener.Stop();
 	}
@@ -74,9 +72,9 @@ public class Server: MonoBehaviour
 
 	public void SendAll(Packet packet, ushort except = 0) {
 		packet.MakeReadable();
-		for (ushort i = 1; i <= maxClients; i++)
-			if (i != except && clients[i].socket != null)
-				clients[i].Send(packet.readBuffer);
+		foreach (Client client in clients.Values)
+			if (client.id != except)
+				client.Send(packet.readBuffer);
 	}
 
 	[PacketHandler(ClientToServer.Join)]
@@ -86,12 +84,14 @@ public class Server: MonoBehaviour
 			username = "Guest " + client;
 			
 		print($"{username} joined!");
+		instance.clients[client].player.gameObject.SetActive(true);
 
-		SendSpawn(username, Vector3.zero);
+		SendSpawn(client, username, Vector3.zero);
 	}
 
-	static void SendSpawn(string username, Vector3 where) {
+	static void SendSpawn(ushort id, string username, Vector3 where) {
 		Packet packet = Packet.Create(ServerToClient.Spawn);
+		packet.AddUShort(id);
 		packet.AddString(username);
 		packet.AddVector3(where);
 		instance.SendAll(packet);

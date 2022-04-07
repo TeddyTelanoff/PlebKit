@@ -8,18 +8,18 @@ using UnityEngine;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 public class PacketHandlerAttribute: Attribute
 {
-	public readonly ClientToServer id;
+	public readonly ServerToClient id;
 
-	public PacketHandlerAttribute(ClientToServer id) {
+	public PacketHandlerAttribute(ServerToClient id) {
 		this.id = id;
 	}
 }
 
 public static class PacketHandling
 {
-	public delegate void PacketHandler(ushort client, Packet packet);
+	public delegate void PacketHandler(Packet packet);
 	
-	public static Dictionary<ClientToServer, PacketHandler> handlers;
+	public static Dictionary<ServerToClient, PacketHandler> handlers;
 
 	// when will my reflection show....
 	public static void MakeDictionary() {
@@ -29,7 +29,7 @@ public static class PacketHandling
 						   .Where(m => m.GetCustomAttributes(typeof(PacketHandlerAttribute), false).Length > 0)
 						   .ToArray();
 
-		handlers = new Dictionary<ClientToServer, PacketHandler>();
+		handlers = new Dictionary<ServerToClient, PacketHandler>();
 		
 		foreach (MethodInfo method in methods)
 		{

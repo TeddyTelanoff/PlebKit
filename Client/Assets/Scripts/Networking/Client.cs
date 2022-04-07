@@ -9,6 +9,8 @@ using UnityEngine;
 public class Client : MonoBehaviour
 {
 	public static Client instance;
+
+	public uint clientId;
 	
 	public WebSocket socket;
 	public int port;
@@ -43,21 +45,13 @@ public class Client : MonoBehaviour
 
 	void OnOpen() {
 		print("socket open");
-		JoinScreen.instance.SendJoin();
 	}
 
 	void OnMessage(byte[] bytes) {
 		Packet packet = new Packet(bytes);
-		ServerToClient id = (ServerToClient) packet.GetUShort();
-		
-		switch (id)
-		{
-		case ServerToClient.Spawn:
-			string username = packet.GetString();
-			Vector3 spawnpoint = packet.GetVector3();
-			print($"{username} spawned!, spawnpoint: {spawnpoint}");
-			break;
-		}
+		ServerToClient packetId = (ServerToClient) packet.GetUShort();
+
+		PacketHandling.handlers[packetId](packet);
 	}
 
 	void OnError(string err) {
@@ -67,5 +61,11 @@ public class Client : MonoBehaviour
 	void OnClose(WebSocketCloseCode code) {
 		print($"socket closed because: {code}");
 		JoinScreen.instance.BackToJoin();
+	}
+
+	[PacketHandler(ServerToClient.Welcome)]
+	void OnWelcome(Packet packet) {
+		clientId = packet.GetUShort();
+		JoinScreen.instance.SendJoin();
 	}
 }
