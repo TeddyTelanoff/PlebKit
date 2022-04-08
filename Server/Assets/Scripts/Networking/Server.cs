@@ -89,8 +89,7 @@ public class Server: MonoBehaviour
 			username = "Guest " + client;
 			
 		print($"{username} joined!");
-		instance.clients[client].player.gameObject.SetActive(true);
-		instance.clients[client].player.username = username;
+		Player.Spawn(client, username);
 
 		Packet spawnPacket = MakeSpawnPacket(client, username, Vector3.zero, instance.clients[client].player.movement.speed);
 		instance.SendAll(spawnPacket, client);

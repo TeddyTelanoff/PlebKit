@@ -287,7 +287,6 @@ public class Client: MonoBehaviour
 	void SendDisconnect() {
 		Packet packet = Packet.Create(ServerToClient.Disconnect);
 		packet.AddUShort(id);
-		packet.Finish();
-		Send(packet.readBuffer);
+		Server.instance.SendAll(packet);
 	}
 }
