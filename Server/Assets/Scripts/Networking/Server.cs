@@ -14,7 +14,7 @@ public class Server: MonoBehaviour
 
 	public GameObject clientPrefab;
 	
-	public int maxClients;
+	public ushort maxClients;
 	public int port;
 
 	public TcpListener tcpListener;
@@ -33,7 +33,9 @@ public class Server: MonoBehaviour
 		tcpListener.Start();
 		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
 
-		for (ushort i = 1; i <= maxClients; i++)
+		// start from client id 1 -> maxClients
+		// (in a stack, you pop the last item you pushed)
+		for (ushort i = maxClients; i > 0; i--)
 			availableClientIds.Push(i);
 
 		print($"server active on port {port}");

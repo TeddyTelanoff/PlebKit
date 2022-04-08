@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bec42982-0460-4321-991d-ed47d5531c60" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/LocalPlayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Prefabs/LocalPlayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Prefabs/OtherPlayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Prefabs/OtherPlayer.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketHandling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketHandling.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketIds.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Client.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Client.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketIds.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Server.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +97,7 @@
       <workItem from="1649260604826" duration="934000" />
       <workItem from="1649278271571" duration="12697000" />
       <workItem from="1649352350307" duration="5408000" />
-      <workItem from="1649380354734" duration="1438000" />
+      <workItem from="1649380354734" duration="1757000" />
     </task>
     <servers />
   </component>

@@ -644,7 +644,6 @@ GameObject:
   - component: {fileID: 313636873}
   - component: {fileID: 313636875}
   - component: {fileID: 313636874}
-  - component: {fileID: 313636876}
   m_Layer: 5
   m_Name: QuizScreen
   m_TagString: Untagged
@@ -714,18 +713,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313636872}
   m_CullTransparentMesh: 1
---- !u!114 &313636876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313636872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b731638cb2a4f20478ad933416a4cb2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &330469066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,7 +1110,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1731914214}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuizFeedbackScreen, Assembly-CSharp
         m_MethodName: NextQustion
         m_Mode: 1
@@ -1400,7 +1387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &696639576
 GameObject:
@@ -1572,7 +1559,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &868695337
 GameObject:
@@ -1786,80 +1773,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905251539}
   m_CullTransparentMesh: 1
---- !u!1 &963194225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 963194228}
-  - component: {fileID: 963194227}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!20 &963194227
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &963194228
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &976942807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,7 +2364,6 @@ GameObject:
   - component: {fileID: 1217465564}
   - component: {fileID: 1217465563}
   - component: {fileID: 1217465562}
-  - component: {fileID: 1217465561}
   m_Layer: 0
   m_Name: FishArea
   m_TagString: Untagged
@@ -2473,18 +2385,6 @@ Transform:
   m_Father: {fileID: 1850020039}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1217465561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217465559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31cae02f2d335f1408f7325cdbcc13f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1217465562
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2611,7 +2511,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1252572050
 GameObject:
@@ -2696,7 +2596,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1731914214}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuizFeedbackScreen, Assembly-CSharp
         m_MethodName: ViewCorrectAnswer
         m_Mode: 1
@@ -2837,7 +2737,6 @@ GameObject:
   - component: {fileID: 1337409022}
   - component: {fileID: 1337409021}
   - component: {fileID: 1337409020}
-  - component: {fileID: 1337409023}
   m_Layer: 0
   m_Name: QuizArea
   m_TagString: Untagged
@@ -2921,18 +2820,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337409018}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1337409023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337409018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31cae02f2d335f1408f7325cdbcc13f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1405251961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,7 +3058,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1731914214}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuizFeedbackScreen, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
@@ -3249,7 +3136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1731914210
 GameObject:
@@ -3262,7 +3149,6 @@ GameObject:
   - component: {fileID: 1731914211}
   - component: {fileID: 1731914213}
   - component: {fileID: 1731914212}
-  - component: {fileID: 1731914214}
   m_Layer: 5
   m_Name: QuizFeedbackScreen
   m_TagString: Untagged
@@ -3331,18 +3217,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731914210}
   m_CullTransparentMesh: 1
---- !u!114 &1731914214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731914210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549e3624b6892434b8ee36ffe7061f8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1752665103
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,7 +3308,6 @@ GameObject:
   - component: {fileID: 1849054259}
   - component: {fileID: 1849054258}
   - component: {fileID: 1849054257}
-  - component: {fileID: 1849054261}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3519,25 +3392,13 @@ RectTransform:
   - {fileID: 313636873}
   - {fileID: 1731914211}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1849054261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849054256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a55d5e28a9f94ea4f8087f69926fa615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1850020038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3569,7 +3430,7 @@ Transform:
   - {fileID: 1337409019}
   - {fileID: 1217465560}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1877655374
 GameObject:
@@ -3812,7 +3673,7 @@ Transform:
   m_Children:
   - {fileID: 136397808}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028712471
 GameObject:
@@ -3844,7 +3705,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2028712473
 MonoBehaviour:
@@ -3872,6 +3733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a597e382e1f9544cba4534740d3535c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   localPlayerPrefab: {fileID: 7630565876194306650, guid: 3f40bb989ead5274ca6bd2cb5a307d09, type: 3}
   otherPlayerPrefab: {fileID: 5326557879226067933, guid: 0e5eeb73f92d9584486a527a1099e414, type: 3}
 --- !u!1 &2098778167
