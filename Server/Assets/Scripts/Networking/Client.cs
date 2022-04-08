@@ -20,6 +20,7 @@ public class Client: MonoBehaviour
 	
 	public TcpClient socket;
 	public NetworkStream stream;
+	public Packet receivedData;
 	public byte[] receiveBuffer;
 	public bool handshakeDone;
 
@@ -30,6 +31,7 @@ public class Client: MonoBehaviour
 
 		stream = socket.GetStream();
 
+		receivedData = new Packet();
 		receiveBuffer = new byte[dataBufferSize];
 
 		stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveHandshakeCallback, null);
@@ -41,6 +43,7 @@ public class Client: MonoBehaviour
 
 		if (len <= 0)
 		{
+			print("len = 0");
 			Disconnect();
 			return;
 		}
@@ -152,6 +155,7 @@ public class Client: MonoBehaviour
 
 			if (len <= 0)
 			{
+				print("len = 0");
 				Disconnect();
 				return;
 			}
@@ -164,14 +168,8 @@ public class Client: MonoBehaviour
 				return;
 
 			byte[] decoded = DecodeMessage(data);
-			Packet packet = new Packet(decoded);
-			if (decoded.Length < 4 || decoded.Length < packet.GetInt())
-				throw new Exception("packet is not big enough. uhh, I mean: size doesn't matter");
-
-			ThreadManager.ExecuteOnMainThread(() => {
-												  ClientToServer packetId = (ClientToServer) packet.GetUShort();
-												  PacketHandling.handlers[packetId](id, packet);
-											  });
+			if (HandleData(decoded))
+				receivedData.Reset();
 			
 			stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
 		}
@@ -180,6 +178,59 @@ public class Client: MonoBehaviour
 			print($"error receiving tcp data: {e}");
 			Disconnect();
 		}
+	}
+
+	// this is "not copied" from tom weiland tcp/udp networking series
+	// actually like all the networking (except websocket stuff) is from tom weiland tcp/udp multiplayer game series
+	// anyways this function builds on a packet because tcp does not like being complete
+	// it returns true if we should reset receivedData
+	// anyways you've made it this far maybe try subscribing to 'Treidex' on YouTube (you can watch my videos too)
+	bool HandleData(byte[] data) {
+		int packetLen;
+
+		receivedData.AddBytes(data);
+		receivedData.ReadReady();
+		
+		
+		packetLen = 0;
+		if (receivedData.unreadLen >= 4)
+		{
+			// we got a new packet
+			packetLen = receivedData.GetInt();
+
+			if (packetLen <= 0)
+				return true;
+		}
+
+		while (packetLen > 0 && packetLen <= receivedData.unreadLen)
+		{
+
+			byte[] packetBytes = receivedData.GetBytes(packetLen);
+
+			// if (packetBytes.Length < 4 || packetBytes.Length < packet.GetInt())
+			// 	throw new Exception("P. is not big enough. uhh, I mean: size doesn't matter");
+
+			ThreadManager.ExecuteOnMainThread(() => {
+												  Packet packet = new Packet(packetBytes);
+												  ClientToServer packetId = (ClientToServer) packet.GetUShort();
+												  PacketHandling.handlers[packetId](id, packet);
+											  });
+			
+			packetLen = 0;
+			if (receivedData.unreadLen >= 4)
+			{
+				// we got a new packet
+				packetLen = receivedData.GetInt();
+
+				if (packetLen <= 0)
+					return true;
+			}
+		} ;
+
+		// this is probably the most comment function in this whole project
+		// maybe even the most commented function in my whole career (if u can call it that)
+		// perhaps even the ONLY commented piece of code in my "life"
+		return packetLen <= 1;
 	}
 
 	byte[] DecodeMessage(byte[] bytes) {
@@ -212,6 +263,9 @@ public class Client: MonoBehaviour
 	}
 
 	public void Send(byte[] data) {
+		if (!socket.Connected)
+			Disconnect(); // todo this is a hacky solution
+		
 		byte[] frame = MakeFrame(data);
 		stream.WriteAsync(frame, 0, frame.Length);
 	}

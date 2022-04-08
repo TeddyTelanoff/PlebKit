@@ -1,10 +1,16 @@
 using UnityEngine;
 
+public enum World: ushort
+{
+	Lobby,
+	Pier,
+}
+
 public class GameLogic: MonoBehaviour
 {
 	public static GameLogic instance;
 
-	public Camera mainCamera;
+	public GameObject[] worlds;
 
 	[Header("Prefabs")]
 	public GameObject localPlayerPrefab;
@@ -13,4 +19,10 @@ public class GameLogic: MonoBehaviour
 	void Awake() {
 		instance = this;
 	}
+	
+	// todo more code
+    public void SwitchWorlds(World newWorld) {
+        worlds[(ushort) Player.localPlayer.world].SetActive(false);
+        worlds[(ushort) newWorld].SetActive(true);
+    }
 }

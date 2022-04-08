@@ -25,6 +25,7 @@ public static class PacketHandling
 		{ ServerToClient.Spawn, Player.OnSpawn },
 		{ ServerToClient.Disconnect, Player.OnDisconnect },
 		{ ServerToClient.PlayerMovement, Player.PlayerMovement },
+		{ ServerToClient.SwitchWorlds, Player.SwitchWorlds },
 	};
 
 	// when will my reflection show....

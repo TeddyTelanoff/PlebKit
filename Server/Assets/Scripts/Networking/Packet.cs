@@ -9,10 +9,11 @@ public class Packet
 	public List<byte> buffer = new List<byte>();
 	public byte[] readBuffer;
 	public int readPos;
+	public int unreadLen => readBuffer.Length - readPos;
 	
 	public bool finished;
 
-	private Packet() {}
+	public Packet() {}
 
 	public static Packet Create(ushort id) {
 		Packet packet = new Packet();
@@ -29,9 +30,13 @@ public class Packet
 		this.readBuffer = readBuffer;
 	}
 
-	public void Finish() {
+	public void Reset() {
+		buffer.Clear();
 		readPos = 0;
+		readBuffer = null;
+	}
 
+	public void Finish() {
 		if (finished)
 			throw new Exception("packet already finished");
 		
@@ -39,6 +44,12 @@ public class Packet
 		buffer.InsertRange(0, BitConverter.GetBytes(buffer.Count));
 		finished = true;
 
+		readPos = 0;
+		ReadReady();
+	}
+
+	// or shall it be called ReadyRead
+	public void ReadReady() {
 		readBuffer = buffer.ToArray();
 	}
 

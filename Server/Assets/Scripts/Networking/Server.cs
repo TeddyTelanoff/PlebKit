@@ -100,7 +100,7 @@ public class Server: MonoBehaviour
 			Packet otherSpawnPacket = MakeSpawnPacket(otherClient.id, otherClient.player.username,
 													  otherClient.player.transform.position,
 													  otherClient.player.movement.speed);
-			instance.Send(otherSpawnPacket, otherClient.id);
+			instance.Send(otherSpawnPacket, client);
 		}
 	}
 
@@ -110,6 +110,7 @@ public class Server: MonoBehaviour
 		packet.AddString(username);
 		packet.AddVector3(where);
 		packet.AddFloat(speed);
+		packet.AddUShort((ushort) GameLogic.instance.spawnWorld);
 
 		return packet;
 	}

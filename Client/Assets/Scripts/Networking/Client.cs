@@ -1,7 +1,4 @@
 using System;
-using System.Text;
-
-using PacketExt;
 
 using NativeWebSocket;
 
@@ -42,6 +39,9 @@ public class Client : MonoBehaviour
 	}
 
 	public void Send(Packet packet) {
+		if (socket.State != WebSocketState.Open)
+			return;
+		
 		packet.Finish();
 		socket.Send(packet.readBuffer);
 	}
@@ -59,7 +59,7 @@ public class Client : MonoBehaviour
 	void OnMessage(byte[] bytes) {
 		Packet packet = new Packet(bytes);
 		if (bytes.Length < 4 || bytes.Length < packet.GetInt())
-			throw new Exception("packet is not big enough. uhh, I mean: size doesn't matter");
+			throw new Exception("P. is not big enough. uhh, I mean: size doesn't matter");
 		ServerToClient packetId = (ServerToClient) packet.GetUShort();
 
 		if (PacketHandling.handlers.TryGetValue(packetId, out PacketHandling.PacketHandler handler))
@@ -75,6 +75,9 @@ public class Client : MonoBehaviour
 	void OnClose(WebSocketCloseCode code) {
 		print($"socket closed because: {code}");
 		JoinScreen.instance.BackToJoin();
+		
+		foreach (Player player in Player.players.Values)
+			Destroy(player.gameObject);
 	}
 
 	[PacketHandler(ServerToClient.Welcome)]

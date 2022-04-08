@@ -968,7 +968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1288197650}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -1028,7 +1028,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1288197647}
   - component: {fileID: 1288197648}
+  - component: {fileID: 1288197651}
   - component: {fileID: 1288197649}
+  - component: {fileID: 1288197650}
   m_Layer: 0
   m_Name: Server
   m_TagString: Untagged
@@ -1077,6 +1079,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653db8d1c99d734797b8f30910aa1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1288197650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288197646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66a892933be5174e93835e2f442cc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 1009148598}
+--- !u!114 &1288197651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288197646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5636dacaaa3f24793a848b904a9671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnWorld: 0
 --- !u!1 &1985856759
 GameObject:
   m_ObjectHideFlags: 0

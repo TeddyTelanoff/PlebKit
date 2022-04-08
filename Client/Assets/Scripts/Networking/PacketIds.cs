@@ -4,6 +4,7 @@
 	Disconnect,
 	Spawn,
 	PlayerMovement,
+	SwitchWorlds,
 }
 
 public enum ClientToServer: ushort
