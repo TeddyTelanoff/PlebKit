@@ -9,6 +9,8 @@ public class Packet
 	public List<byte> buffer = new List<byte>();
 	public byte[] readBuffer;
 	public int readPos;
+	
+	public bool finished;
 
 	private Packet() {}
 
@@ -27,10 +29,17 @@ public class Packet
 		this.readBuffer = readBuffer;
 	}
 
-	public Packet MakeReadable() {
+	public void Finish() {
 		readPos = 0;
+
+		if (finished)
+			throw new Exception("packet already finished");
+		
+		// write packet length
+		buffer.InsertRange(0, BitConverter.GetBytes(buffer.Count));
+		finished = true;
+
 		readBuffer = buffer.ToArray();
-		return this;
 	}
 
 	public Packet AddByte(byte a) {

@@ -71,12 +71,12 @@ public class Server: MonoBehaviour
 	}
 
 	public void Send(Packet packet, ushort client) {
-		packet.MakeReadable();
+		packet.Finish();
 		clients[client].Send(packet.readBuffer);
 	}
 
 	public void SendAll(Packet packet, ushort except = 0) {
-		packet.MakeReadable();
+		packet.Finish();
 		foreach (Client client in clients.Values)
 			if (client.id != except)
 				client.Send(packet.readBuffer);

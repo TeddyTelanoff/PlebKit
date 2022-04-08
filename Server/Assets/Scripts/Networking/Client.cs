@@ -33,7 +33,7 @@ public class Client: MonoBehaviour
 		receiveBuffer = new byte[dataBufferSize];
 
 		stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveHandshakeCallback, null);
-		print("client found");
+		print($"client {id} found");
 	}
 
 	void ReceiveHandshakeCallback(IAsyncResult result) {
@@ -60,7 +60,7 @@ public class Client: MonoBehaviour
 	void SendWelcome() {
 		Packet packet = Packet.Create(ServerToClient.Welcome);
 		packet.AddUShort(id);
-		packet.MakeReadable();
+		packet.Finish();
 		Send(packet.readBuffer);
 	}
 
@@ -164,8 +164,11 @@ public class Client: MonoBehaviour
 				return;
 
 			byte[] decoded = DecodeMessage(data);
+			Packet packet = new Packet(decoded);
+			if (decoded.Length < 4 || decoded.Length < packet.GetInt())
+				throw new Exception("packet is not big enough. uhh, I mean: size doesn't matter");
+
 			ThreadManager.ExecuteOnMainThread(() => {
-												  Packet packet = new Packet(decoded);
 												  ClientToServer packetId = (ClientToServer) packet.GetUShort();
 												  PacketHandling.handlers[packetId](id, packet);
 											  });
@@ -183,6 +186,9 @@ public class Client: MonoBehaviour
 		bool fin = (bytes[0] & 0b10000000) != 0;
 		bool mask = (bytes[1] & 0b10000000) != 0;
 
+		if (!fin)
+			throw new Exception("fatal bug; just hang urself at this point");
+
 		int opcode = bytes[0] & 0b00001111;
 		int msglen = bytes[1] & 0b01111111;
 		int offset = 2;
@@ -195,7 +201,7 @@ public class Client: MonoBehaviour
 			byte[] decoded = new byte[msglen];
 			byte[] masks = new byte[4] { bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3] };
 			offset += 4;
-			
+
 			for (int i = 0; i < msglen; i++)
 				decoded[i] = (byte) (bytes[offset + i] ^ masks[i % 4]);
 
@@ -227,7 +233,7 @@ public class Client: MonoBehaviour
 	void SendDisconnect() {
 		Packet packet = Packet.Create(ServerToClient.Disconnect);
 		packet.AddUShort(id);
-		packet.MakeReadable();
+		packet.Finish();
 		Send(packet.readBuffer);
 	}
 }
