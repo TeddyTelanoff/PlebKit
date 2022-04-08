@@ -143,7 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b770a6f405ce943ba8fc8afd446a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  client: {fileID: 0}
+  client: {fileID: 1726688899668965064}
+  movement: {fileID: 2598448908102634073}
+  username: 
 --- !u!114 &2598448908102634073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,3 +158,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc519d3a91ce5da499635d28b2045974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 500

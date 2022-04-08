@@ -1,6 +1,7 @@
 ﻿public enum ServerToClient: ushort
 {
 	Welcome,
+	Disconnect,
 	Spawn,
 	PlayerMovement,
 }

@@ -97,7 +97,19 @@ public class Client: MonoBehaviour
 													}, null);
 	}
 
+	// see if we get a closing handshake msg, if so send back a closing handshake
+	bool HandleClosingHandshake(byte[] bytes) {
+		if (bytes[0] != 0b10001000)
+			return false;
+		
+		// opcode is 8, so it's a close connection
+		Disconnect();
+
+		return true;
+	}
+
 	public void Disconnect() {
+		SendDisconnect();
 		ClosingHandshake();
 
 		ThreadManager.ExecuteOnMainThread(() => {
@@ -109,6 +121,7 @@ public class Client: MonoBehaviour
 
 											  Destroy(gameObject);
 										  });
+		print($"client {id} disconnected");
 	}
 
 	void NotFixedUpdate() {
@@ -145,6 +158,10 @@ public class Client: MonoBehaviour
 
 			byte[] data = new byte[len];
 			Array.Copy(receiveBuffer, data, len);
+			
+			// check for closing connection before anything bad can happen
+			if (HandleClosingHandshake(data))
+				return;
 
 			byte[] decoded = DecodeMessage(data);
 			ThreadManager.ExecuteOnMainThread(() => {
@@ -205,5 +222,12 @@ public class Client: MonoBehaviour
 		Array.Copy(data, 0, bytes, 2, data.Length);
 
 		return bytes;
+	}
+
+	void SendDisconnect() {
+		Packet packet = Packet.Create(ServerToClient.Disconnect);
+		packet.AddUShort(id);
+		packet.MakeReadable();
+		Send(packet.readBuffer);
 	}
 }

@@ -14,29 +14,45 @@ public class Player: MonoBehaviour
 	public string username;
 	public bool isLocal;
 
+	public PlayerMovement movement;
+
+	void OnValidate() {
+		if (movement == null)
+			TryGetComponent(out movement);
+	}
+
 	[PacketHandler(ServerToClient.PlayerMovement)]
-	static void PlayerMovement(Packet packet) {
+	public static void PlayerMovement(Packet packet) {
 		ushort client = packet.GetUShort();
 		players[client].transform.position = packet.GetVector3();
 	}
 
 	[PacketHandler(ServerToClient.Spawn)]
-	static void OnSpawn(Packet packet) {
+	public static void OnSpawn(Packet packet) {
 		ushort id = packet.GetUShort();
 		string username = packet.GetString();
 		Vector3 spawnpoint = packet.GetVector3();
+		float speed = packet.GetFloat();
 		print($"{username} spawned!, spawnpoint: {spawnpoint}");
 
-		SpawnPlayer(id, username, spawnpoint);
+		SpawnPlayer(id, username, spawnpoint, speed);
 	}
 
-	static void SpawnPlayer(ushort id, string username, Vector3 spawnpoint) {
+	[PacketHandler(ServerToClient.Disconnect)]
+	public static void OnDisconnect(Packet packet) {
+		ushort id = packet.GetUShort();
+		print($"player {id} disconnected");
+		Destroy(players[id].gameObject);
+	}
+
+	static void SpawnPlayer(ushort id, string username, Vector3 spawnpoint, float speed) {
 		Player player;
 		
 		if (id == Client.instance.clientId) // hey look it's me!
 		{
 			player = Instantiate(GameLogic.instance.localPlayerPrefab).GetComponent<Player>();
 			player.isLocal = true;
+			player.movement.speed = speed;
 		}
 		else
 		{

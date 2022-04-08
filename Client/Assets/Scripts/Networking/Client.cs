@@ -20,13 +20,19 @@ public class Client : MonoBehaviour
 	}
 
 	void Start() {
-		PacketHandling.MakeDictionary();
+	#if UNITY_EDITOR
+		PacketHandling.VerifyDictionary();
+	#endif
 
 		socket = new WebSocket($"ws://localhost:{port}/");
 		socket.OnOpen += OnOpen;
 		socket.OnClose += OnClose;
 		socket.OnError += OnError;
 		socket.OnMessage += OnMessage;
+	}
+
+	void OnApplicationQuit() {
+		socket.Close();
 	}
 
 	public void Connect() {
@@ -69,7 +75,7 @@ public class Client : MonoBehaviour
 	}
 
 	[PacketHandler(ServerToClient.Welcome)]
-	static void OnWelcome(Packet packet) {
+	public static void OnWelcome(Packet packet) {
 		instance.clientId = packet.GetUShort();
 		JoinScreen.instance.SendJoin();
 	}

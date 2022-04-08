@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement: MonoBehaviour
 {
+	public float speed;
+
 	[PacketHandler(ClientToServer.Movement)]
 	static void Movement(ushort client, Packet packet) {
 		Vector3 movement = packet.GetVector3();

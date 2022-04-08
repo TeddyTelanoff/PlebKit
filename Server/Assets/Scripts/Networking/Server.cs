@@ -88,15 +88,27 @@ public class Server: MonoBehaviour
 			
 		print($"{username} joined!");
 		instance.clients[client].player.gameObject.SetActive(true);
+		instance.clients[client].player.username = username;
 
-		SendSpawn(client, username, Vector3.zero);
+		Packet spawnPacket = MakeSpawnPacket(client, username, Vector3.zero, instance.clients[client].player.movement.speed);
+		instance.SendAll(spawnPacket, client);
+
+		foreach (Client otherClient in instance.clients.Values)
+		{
+			Packet otherSpawnPacket = MakeSpawnPacket(otherClient.id, otherClient.player.username,
+													  otherClient.player.transform.position,
+													  otherClient.player.movement.speed);
+			instance.Send(otherSpawnPacket, otherClient.id);
+		}
 	}
 
-	static void SendSpawn(ushort id, string username, Vector3 where) {
+	static Packet MakeSpawnPacket(ushort id, string username, Vector3 where, float speed) {
 		Packet packet = Packet.Create(ServerToClient.Spawn);
 		packet.AddUShort(id);
 		packet.AddString(username);
 		packet.AddVector3(where);
-		instance.SendAll(packet);
+		packet.AddFloat(speed);
+
+		return packet;
 	}
 }

@@ -18,23 +18,30 @@ public class PacketHandlerAttribute: Attribute
 public static class PacketHandling
 {
 	public delegate void PacketHandler(Packet packet);
-	
-	public static Dictionary<ServerToClient, PacketHandler> handlers;
+
+	public static Dictionary<ServerToClient, PacketHandler> handlers = new Dictionary<ServerToClient, PacketHandler>()
+	{
+		{ ServerToClient.Welcome, Client.OnWelcome },
+		{ ServerToClient.Spawn, Player.OnSpawn },
+		{ ServerToClient.Disconnect, Player.OnDisconnect },
+		{ ServerToClient.PlayerMovement, Player.PlayerMovement },
+	};
 
 	// when will my reflection show....
-	public static void MakeDictionary() {
+	// but reflection doesn't work in webgl builds ig
+	public static void VerifyDictionary() {
 		MethodInfo[] methods = Assembly.GetCallingAssembly()
-						   .GetTypes()
-						   .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
-						   .Where(m => m.GetCustomAttributes(typeof(PacketHandlerAttribute), false).Length > 0)
-						   .ToArray();
-
-		handlers = new Dictionary<ServerToClient, PacketHandler>();
+									   .GetTypes()
+									   .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+									   .Where(m => m.GetCustomAttributes(typeof(PacketHandlerAttribute), false).Length > 0)
+									   .ToArray();
+		
+		Dictionary<ServerToClient, PacketHandler> foundHandlers = new Dictionary<ServerToClient, PacketHandler>();
 		
 		foreach (MethodInfo method in methods)
 		{
 			PacketHandlerAttribute attribute = method.GetCustomAttribute<PacketHandlerAttribute>();
-
+			
 			if (!method.IsStatic)
 				throw new Exception($"packet handler {method.DeclaringType}.{method.Name} is not static");
 			
@@ -42,7 +49,7 @@ public static class PacketHandling
 
 			if (handler != null)
 			{
-				if (handlers.TryGetValue(attribute.id, out PacketHandler twin))
+				if (foundHandlers.TryGetValue(attribute.id, out PacketHandler twin))
 				{
 					MethodInfo twinMethod = twin.GetMethodInfo();
 
@@ -51,7 +58,9 @@ public static class PacketHandling
 					);
 				}
 				
-				handlers.Add(attribute.id, (PacketHandler) handler);
+				foundHandlers.Add(attribute.id, (PacketHandler) handler);
+				if (!handlers.ContainsValue((PacketHandler) handler))
+					Debug.LogWarning($"no packet handler for {method.DeclaringType}.{method.Name}");
 			}
 			else
 				throw new Exception($"{method.DeclaringType}.{method.Name} has incorrect signature");
