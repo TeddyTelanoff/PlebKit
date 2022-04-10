@@ -3,12 +3,15 @@ using PacketExt;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerQuiz))]
 public class Player : MonoBehaviour
 {
 	public Client client;
 
 	public PlayerMovement movement;
 	public PlayerListItem listItem;
+	public PlayerQuiz quiz;
+	public PlayerFish fish;
 
 	public string username;
 	public World world;
@@ -19,6 +22,12 @@ public class Player : MonoBehaviour
 		
 		if (movement == null)
 			movement = GetComponent<PlayerMovement>();
+		
+		if (quiz == null)
+			quiz = GetComponent<PlayerQuiz>();
+		
+		if (fish == null)
+			fish = GetComponent<PlayerFish>();
 	}
 
 	void OnDestroy() {
@@ -42,5 +51,20 @@ public class Player : MonoBehaviour
 		client.player.name = $"{username} #{clientId}";
 		
 		PlayerListManager.instance.AddItem(client.player);
+	}
+
+	[PacketHandler(ClientToServer.Quiz)]
+	static void Quiz(ushort clientId, Packet packet) {
+		if (Server.instance.clients.TryGetValue(clientId, out Client client))
+		{
+			client.player.quiz.NewQuestion();
+			client.player.quiz.SendQuestion();
+		}
+	}
+
+	[PacketHandler(ClientToServer.QuizGuess)]
+	static void QuizGuess(ushort clientId, Packet packet) {
+		if (Server.instance.clients.TryGetValue(clientId, out Client client))
+			client.player.quiz.Guess(packet.GetInt());
 	}
 }

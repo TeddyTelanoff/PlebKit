@@ -120,6 +120,14 @@ public class Packet
 		return this;
 	}
 
+	public Packet AddStrings(string[] a) {
+		AddInt(a.Length);
+		foreach (string s in a)
+			AddString(s);
+
+		return this;
+	}
+
 
 	public byte GetByte() {
 		return buffer[readPos++];
@@ -191,5 +199,13 @@ public class Packet
 		string str = Encoding.UTF8.GetString(readBuffer, readPos, len);
 		readPos += len;
 		return str;
+	}
+
+	public string[] GetStrings() {
+		int len = GetInt();
+		string[] strs = new string[len];
+		for (int i = 0; i < len; i++)
+			strs[i] = GetString();
+		return strs;
 	}
 }

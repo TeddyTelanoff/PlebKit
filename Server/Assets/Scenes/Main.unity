@@ -1195,6 +1195,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnWorld: 0
+  questions:
+  - prompt: What killed Steve Jobs?
+    choices:
+    - Ligma
+    - Who the hell is Steve Jobs?
+    - Unemployment
+    - My jokes
+    answer: 0
 --- !u!1 &1985856759
 GameObject:
   m_ObjectHideFlags: 0

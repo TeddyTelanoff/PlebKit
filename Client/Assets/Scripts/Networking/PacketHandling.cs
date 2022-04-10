@@ -26,6 +26,8 @@ public static class PacketHandling
 		{ ServerToClient.Disconnect, Player.OnDisconnect },
 		{ ServerToClient.PlayerMovement, Player.PlayerMovement },
 		{ ServerToClient.SwitchWorlds, Player.SwitchWorlds },
+		{ ServerToClient.Question, PlayerQuiz.Question },
+		{ ServerToClient.QuestionFeedback, PlayerQuiz.QuestionFeedback },
 	};
 
 	// when will my reflection show....
@@ -66,5 +68,9 @@ public static class PacketHandling
 			else
 				throw new Exception($"{method.DeclaringType}.{method.Name} has incorrect signature");
 		}
+		
+		foreach (KeyValuePair<ServerToClient, PacketHandler> foundHandler in foundHandlers)
+			if (!handlers.ContainsValue(foundHandler.Value))
+				handlers.Add(foundHandler.Key, foundHandler.Value);
 	}
 }

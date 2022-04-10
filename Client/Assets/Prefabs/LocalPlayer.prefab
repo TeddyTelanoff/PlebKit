@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 7630565876194306652}
   - component: {fileID: 5600933835624344046}
   - component: {fileID: 4848282919399528104}
+  - component: {fileID: 65624032524236955}
+  - component: {fileID: -8863237204915002832}
   - component: {fileID: -7053140185212796703}
   m_Layer: 0
   m_Name: LocalPlayer
@@ -134,6 +136,7 @@ MonoBehaviour:
   id: 0
   username: 
   isLocal: 0
+  world: 0
   movement: {fileID: 4848282919399528104}
 --- !u!54 &5600933835624344046
 Rigidbody:
@@ -165,6 +168,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5600933835624344046}
   speed: 0
+--- !u!114 &65624032524236955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630565876194306650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6096339e868f034195972d89412e3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activityButton: {fileID: 0}
+  activityText: {fileID: 0}
+  activity: 0
+--- !u!114 &-8863237204915002832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630565876194306650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf22f671a69295499f67df946451c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  question:
+    prompt: 
+    choices: []
 --- !u!136 &-7053140185212796703
 CapsuleCollider:
   m_ObjectHideFlags: 0

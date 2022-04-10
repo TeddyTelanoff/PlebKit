@@ -213,7 +213,15 @@ public class Client: MonoBehaviour
 			ThreadManager.ExecuteOnMainThread(() => {
 												  Packet packet = new Packet(packetBytes);
 												  ClientToServer packetId = (ClientToServer) packet.GetUShort();
-												  PacketHandling.handlers[packetId](id, packet);
+												  
+												  try
+												  {
+													  PacketHandling.handlers[packetId](id, packet);
+												  }
+												  catch (KeyNotFoundException)
+												  {
+													  throw new Exception($"packet #{packetId} not handled");
+												  }
 											  });
 			
 			packetLen = 0;

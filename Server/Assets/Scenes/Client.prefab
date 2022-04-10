@@ -61,6 +61,8 @@ GameObject:
   - component: {fileID: 4850888365506761929}
   - component: {fileID: 4850888365506761930}
   - component: {fileID: 2598448908102634073}
+  - component: {fileID: 7018584666805474070}
+  - component: {fileID: 376254456005642323}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -145,7 +147,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   client: {fileID: 1726688899668965064}
   movement: {fileID: 2598448908102634073}
+  listItem: {fileID: 0}
+  quiz: {fileID: 7018584666805474070}
+  fish: {fileID: 376254456005642323}
   username: 
+  world: 0
 --- !u!114 &2598448908102634073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,3 +165,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1000
+--- !u!114 &7018584666805474070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850888365506761931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2199d1c65b851a40892a855dda5219f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  question:
+    prompt: 
+    choices: []
+    answer: 0
+  player: {fileID: 4850888365506761930}
+--- !u!114 &376254456005642323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850888365506761931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7895cf3501989da4b826a2550a781ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4850888365506761930}
+  bait: 0
+  fishes: 

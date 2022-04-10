@@ -18,6 +18,8 @@ public class Player: MonoBehaviour
 
 	public PlayerMovement movement;
 
+	public int bait; // todo move to PlayerFish
+
 	void OnValidate() {
 		if (movement == null)
 			TryGetComponent(out movement);

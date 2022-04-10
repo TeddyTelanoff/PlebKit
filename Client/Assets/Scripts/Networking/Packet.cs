@@ -9,10 +9,11 @@ public class Packet
 	public List<byte> buffer = new List<byte>();
 	public byte[] readBuffer;
 	public int readPos;
+	public int unreadLen => readBuffer.Length - readPos;
 	
 	public bool finished;
 
-	private Packet() {}
+	public Packet() {}
 
 	public static Packet Create(ushort id) {
 		Packet packet = new Packet();
@@ -29,9 +30,13 @@ public class Packet
 		this.readBuffer = readBuffer;
 	}
 
-	public void Finish() {
+	public void Reset() {
+		buffer.Clear();
 		readPos = 0;
+		readBuffer = null;
+	}
 
+	public void Finish() {
 		if (finished)
 			throw new Exception("packet already finished");
 		
@@ -39,6 +44,12 @@ public class Packet
 		buffer.InsertRange(0, BitConverter.GetBytes(buffer.Count));
 		finished = true;
 
+		readPos = 0;
+		ReadReady();
+	}
+
+	// or shall it be called ReadyRead
+	public void ReadReady() {
 		readBuffer = buffer.ToArray();
 	}
 
@@ -105,6 +116,14 @@ public class Packet
 	public Packet AddString(string a) {
 		AddInt(a.Length);
 		AddBytes(Encoding.UTF8.GetBytes(a));
+
+		return this;
+	}
+
+	public Packet AddStrings(string[] a) {
+		AddInt(a.Length);
+		foreach (string s in a)
+			AddString(s);
 
 		return this;
 	}
@@ -180,5 +199,13 @@ public class Packet
 		string str = Encoding.UTF8.GetString(readBuffer, readPos, len);
 		readPos += len;
 		return str;
+	}
+
+	public string[] GetStrings() {
+		int len = GetInt();
+		string[] strs = new string[len];
+		for (int i = 0; i < len; i++)
+			strs[i] = GetString();
+		return strs;
 	}
 }
