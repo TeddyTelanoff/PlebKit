@@ -17,12 +17,16 @@ public class Player: MonoBehaviour
 	public World world;
 
 	public PlayerMovement movement;
-
-	public int bait; // todo move to PlayerFish
+	public PlayerQuiz quiz;
+	public PlayerFish fish;
 
 	void OnValidate() {
 		if (movement == null)
 			TryGetComponent(out movement);
+		if (quiz == null)
+			TryGetComponent(out quiz);
+		if (fish == null)
+			TryGetComponent(out fish);
 	}
 
 	void OnDestroy() {
@@ -81,6 +85,7 @@ public class Player: MonoBehaviour
 			player.movement.speed = speed;
 
 			localPlayer = player;
+			GameLogic.instance.SwitchWorlds(world);
 			foreach (Player otherPlayer in players.Values)
 				if (otherPlayer.world != world)
 					otherPlayer.gameObject.SetActive(false);

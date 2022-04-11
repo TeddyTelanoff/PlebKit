@@ -12,7 +12,15 @@ public class GameLogic: MonoBehaviour
 
     public World spawnWorld;
     public Question[] questions;
-    
+    public FishSpecie[] fishSpecies;
+    public float totalFishSpeciesChance;
+
+    void OnValidate() {
+        totalFishSpeciesChance = 0;
+        foreach (FishSpecie fishSpecie in fishSpecies)
+            totalFishSpeciesChance += fishSpecie.chance;
+    }
+
     void Awake() {
         instance = this;
     }

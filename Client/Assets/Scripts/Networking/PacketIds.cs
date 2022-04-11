@@ -7,6 +7,8 @@
 	SwitchWorlds,
 	Question,
 	QuestionFeedback,
+	InventoryUpdate,
+	FishResult,
 }
 
 public enum ClientToServer: ushort
@@ -15,4 +17,5 @@ public enum ClientToServer: ushort
 	Movement,
 	Quiz,
 	QuizGuess,
+	Fish,
 }

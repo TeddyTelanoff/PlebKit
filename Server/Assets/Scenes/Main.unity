@@ -1203,6 +1203,16 @@ MonoBehaviour:
     - Unemployment
     - My jokes
     answer: 0
+  fishSpecies:
+  - value: 5
+    chance: 50
+  - value: 6
+    chance: 25
+  - value: 8
+    chance: 24
+  - value: 15
+    chance: 1
+  totalFishSpeciesChance: 100
 --- !u!1 &1985856759
 GameObject:
   m_ObjectHideFlags: 0

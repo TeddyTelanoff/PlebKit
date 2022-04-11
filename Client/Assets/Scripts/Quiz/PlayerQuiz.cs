@@ -1,3 +1,5 @@
+using PacketExt;
+
 using UnityEngine;
 
 public class PlayerQuiz: MonoBehaviour
@@ -26,7 +28,9 @@ public class PlayerQuiz: MonoBehaviour
 		GameLogic.instance.quizFeedbackScreen.gameObject.SetActive(true);
 		int answer = packet.GetInt();
 		int updatedBait = packet.GetInt();
-		GameLogic.instance.quizFeedbackScreen.DisplayFeedback(Player.localPlayer.GetComponent<PlayerQuiz>().question.choices[answer], updatedBait - Player.localPlayer.bait);
-		Player.localPlayer.bait = updatedBait;
+		GameLogic.instance.quizFeedbackScreen.DisplayFeedback(
+			Player.localPlayer.GetComponent<PlayerQuiz>().question.choices[answer],
+			updatedBait - Player.localPlayer.fish.bait);
+		Player.localPlayer.fish.bait = updatedBait;
 	}
 }

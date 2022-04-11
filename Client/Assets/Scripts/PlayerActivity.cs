@@ -27,6 +27,7 @@ public class PlayerActivity: MonoBehaviour
 		
 		activityDoers = new Dictionary<Activity, ActivityDoer> {
 			{ Activity.Quiz, SendDoQuiz },
+			{ Activity.Fish, DoFish },
 		};
 	}
 
@@ -45,6 +46,10 @@ public class PlayerActivity: MonoBehaviour
 	public void SendDoQuiz() {
 		Packet packet = Packet.Create(ClientToServer.Quiz);
 		Client.instance.Send(packet);
+	}
+
+	void DoFish() {
+		Player.localPlayer.fish.GoFishing();
 	}
 
 	public void FinishActivity() {

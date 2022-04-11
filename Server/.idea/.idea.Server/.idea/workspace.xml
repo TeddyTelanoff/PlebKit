@@ -7,16 +7,28 @@
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/GameLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/GameLogic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/Packet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketHandling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketHandling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketExt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketExt.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Networking/PacketIds.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerActivity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerQuiz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/PlayerQuiz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/PlayerQuiz.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/PlayerQuiz.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Question.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/Question.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/Question.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/Question.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizFeedbackScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/QuizFeedbackScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizFeedbackScreen.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/QuizFeedbackScreen.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/QuizScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Assets/Scripts/QuizScreen.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Assets/Scripts/Quiz/QuizScreen.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Client.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Client.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Packet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketExt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketExt.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketIds.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerFish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerFish.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerQuiz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerQuiz.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +124,8 @@
       <workItem from="1649380354734" duration="4799000" />
       <workItem from="1649437795039" duration="6000" />
       <workItem from="1649438663788" duration="4634000" />
-      <workItem from="1649615405196" duration="2094000" />
+      <workItem from="1649615405196" duration="5301000" />
+      <workItem from="1649632616332" duration="5199000" />
     </task>
     <servers />
   </component>

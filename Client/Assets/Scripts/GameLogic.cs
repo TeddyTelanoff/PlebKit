@@ -12,12 +12,19 @@ public class GameLogic: MonoBehaviour
 	public static GameLogic instance;
 
 	public GameObject[] worlds;
+	
+	[Header("Activity")]
 	public string[] activityTexts;
 	public GameObject activityButton;
 	public Text activityText;
 	
+	[Header("Quiz")]
 	public QuizScreen quizScreen;
 	public QuizFeedbackScreen quizFeedbackScreen;
+
+	[Header("Fish")]
+	public FishScreen fishScreen;
+	public FishSpecie[] fishSpecies;
 
 	[Header("Prefabs")]
 	public GameObject localPlayerPrefab;

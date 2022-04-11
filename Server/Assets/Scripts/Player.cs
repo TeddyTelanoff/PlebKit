@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 	public string username;
 	public World world;
 
+	public float money;
+
 	void OnValidate() {
 		if (client == null)
 			client = GetComponentInParent<Client>();
@@ -53,6 +55,15 @@ public class Player : MonoBehaviour
 		PlayerListManager.instance.AddItem(client.player);
 	}
 
+	public void SendInventoryUpdate() {
+		Packet packet = Packet.Create(ServerToClient.InventoryUpdate);
+		packet.AddUShort(client.id);
+		packet.AddFloat(money);
+		packet.AddInt(fish.bait);
+		packet.AddInts(fish.fishes);
+		Server.instance.SendAll(packet);
+	}
+
 	[PacketHandler(ClientToServer.Quiz)]
 	static void Quiz(ushort clientId, Packet packet) {
 		if (Server.instance.clients.TryGetValue(clientId, out Client client))
@@ -66,5 +77,11 @@ public class Player : MonoBehaviour
 	static void QuizGuess(ushort clientId, Packet packet) {
 		if (Server.instance.clients.TryGetValue(clientId, out Client client))
 			client.player.quiz.Guess(packet.GetInt());
+	}
+
+	[PacketHandler(ClientToServer.Fish)]
+	static void Fish(ushort clientId, Packet packet) {
+		if (Server.instance.clients.TryGetValue(clientId, out Client client))
+			client.player.fish.GoFishing();
 	}
 }

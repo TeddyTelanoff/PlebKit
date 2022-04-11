@@ -152,6 +152,7 @@ MonoBehaviour:
   fish: {fileID: 376254456005642323}
   username: 
   world: 0
+  money: 0
 --- !u!114 &2598448908102634073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,5 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4850888365506761930}
+  waitTime: 1
   bait: 0
   fishes: 
