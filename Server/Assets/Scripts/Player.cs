@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerQuiz))]
+[RequireComponent(typeof(Collider))]
 public class Player : MonoBehaviour
 {
 	public Client client;
@@ -57,11 +58,10 @@ public class Player : MonoBehaviour
 
 	public void SendInventoryUpdate() {
 		Packet packet = Packet.Create(ServerToClient.InventoryUpdate);
-		packet.AddUShort(client.id);
 		packet.AddFloat(money);
 		packet.AddInt(fish.bait);
 		packet.AddInts(fish.fishes);
-		Server.instance.SendAll(packet);
+		Server.instance.Send(packet, client.id);
 	}
 
 	[PacketHandler(ClientToServer.Quiz)]
@@ -83,5 +83,11 @@ public class Player : MonoBehaviour
 	static void Fish(ushort clientId, Packet packet) {
 		if (Server.instance.clients.TryGetValue(clientId, out Client client))
 			client.player.fish.GoFishing();
+	}
+
+	[PacketHandler(ClientToServer.SellFish)]
+	static void SellFish(ushort clientId, Packet packet) {
+		if (Server.instance.clients.TryGetValue(clientId, out Client client))
+			client.player.fish.SellFish();
 	}
 }

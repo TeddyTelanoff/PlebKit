@@ -23,6 +23,16 @@ public class PlayerFish: MonoBehaviour
 		fishes = new int[GameLogic.instance.fishSpecies.Length];
 	}
 
+	public void SellFish() {
+		for (int i = 0; i < fishes.Length; i++)
+		{
+			player.money += fishes[i] * GameLogic.instance.fishSpecies[i].value;
+			fishes[i] = 0;
+		}
+		
+		player.SendInventoryUpdate();
+	}
+
 	void SendFishResult(int fishSpecieId) {
 		Packet packet = Packet.Create(ServerToClient.FishResult);
 		packet.AddInt(fishSpecieId);
@@ -50,9 +60,14 @@ public class PlayerFish: MonoBehaviour
 			SendFishResult(i);
 		}
 
+		if (bait <= 0)
+			return; // stop cheating, teddy
+		
 		if (fishing)
-			return; // stop cheating teddy
+			return; // teddy, just please stop, it's not fair
 		fishing = true;
+
+		// todo fishing areas
 		StartCoroutine(CoRoutine());
 	}
 }

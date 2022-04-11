@@ -29,6 +29,7 @@ public static class PacketHandling
 		{ ServerToClient.Question, PlayerQuiz.Question },
 		{ ServerToClient.QuestionFeedback, PlayerQuiz.QuestionFeedback },
 		{ ServerToClient.FishResult, PlayerFish.FishResult },
+		{ ServerToClient.InventoryUpdate, Player.InventoryUpdate },
 	};
 
 	// when will my reflection show....

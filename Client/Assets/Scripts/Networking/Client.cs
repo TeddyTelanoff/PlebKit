@@ -17,23 +17,22 @@ public class Client : MonoBehaviour
 		instance = this;
 	}
 
+#if UNITY_EDITOR
 	void Start() {
-	#if UNITY_EDITOR
 		PacketHandling.VerifyDictionary();
-	#endif
-
-		socket = new WebSocket($"ws://localhost:{port}/");
-		socket.OnOpen += OnOpen;
-		socket.OnClose += OnClose;
-		socket.OnError += OnError;
-		socket.OnMessage += OnMessage;
 	}
+#endif
 
 	void OnApplicationQuit() {
 		socket.Close();
 	}
 
-	public void Connect() {
+	public void Connect(string ip) {
+		socket = new WebSocket($"ws://{ip}:{port}/");
+		socket.OnOpen += OnOpen;
+    	socket.OnClose += OnClose;
+    	socket.OnError += OnError;
+    	socket.OnMessage += OnMessage;
 		socket.Connect();
 		print("connecting...");
 	}
@@ -48,7 +47,8 @@ public class Client : MonoBehaviour
 
 #if !UNITY_WEBGL || UNITY_EDITOR
 	void FixedUpdate() {
-		socket.DispatchMessageQueue();
+		if (socket != null)
+			socket.DispatchMessageQueue();
 	}
 #endif
 

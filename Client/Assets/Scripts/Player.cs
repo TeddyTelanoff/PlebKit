@@ -20,6 +20,8 @@ public class Player: MonoBehaviour
 	public PlayerQuiz quiz;
 	public PlayerFish fish;
 
+	public float money;
+
 	void OnValidate() {
 		if (movement == null)
 			TryGetComponent(out movement);
@@ -30,7 +32,16 @@ public class Player: MonoBehaviour
 	}
 
 	void OnDestroy() {
+		if (isLocal)
+		{
+			GameLogic.instance.SwitchWorlds(World.Lobby);
+			GameLogic.instance.supplyPanel.SetActive(false);
+		}
 		players.Remove(id);
+	}
+
+	public static void UpdateSupplyDisplay() {
+		GameLogic.instance.supplyText.text = $"Bait: {localPlayer.fish.bait}; Money: {localPlayer.money}";
 	}
 
 	[PacketHandler(ServerToClient.PlayerMovement)]
@@ -75,6 +86,19 @@ public class Player: MonoBehaviour
 		}
 	}
 
+	[PacketHandler(ServerToClient.InventoryUpdate)]
+	public static void InventoryUpdate(Packet packet) {
+		float money = packet.GetFloat();
+		int bait = packet.GetInt();
+		int[] fishes = packet.GetInts();
+
+		localPlayer.money = money;
+		localPlayer.fish.bait = bait;
+		localPlayer.fish.fishes = fishes;
+
+		UpdateSupplyDisplay();
+	}
+
 	static void SpawnPlayer(ushort id, string username, Vector3 spawnpoint, float speed, World world) {
 		Player player;
 		
@@ -86,6 +110,8 @@ public class Player: MonoBehaviour
 
 			localPlayer = player;
 			GameLogic.instance.SwitchWorlds(world);
+			GameLogic.instance.supplyPanel.SetActive(true);
+			UpdateSupplyDisplay();
 			foreach (Player otherPlayer in players.Values)
 				if (otherPlayer.world != world)
 					otherPlayer.gameObject.SetActive(false);

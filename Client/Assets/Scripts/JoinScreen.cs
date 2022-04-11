@@ -5,11 +5,9 @@ public class JoinScreen: MonoBehaviour
 {
     public static JoinScreen instance;
     
-    [Header("Connect")]
-    [SerializeField]
-    GameObject joinUI;
-    [SerializeField]
-    InputField usernameField;
+    public GameObject joinUI;
+    public InputField ipAddressField;
+    public InputField usernameField;
 
     void Awake() {
         instance = this;
@@ -19,7 +17,7 @@ public class JoinScreen: MonoBehaviour
         usernameField.interactable = false;
         joinUI.SetActive(false);
 
-        Client.instance.Connect();
+        Client.instance.Connect(ipAddressField.text);
     }
 
     public void BackToJoin() {

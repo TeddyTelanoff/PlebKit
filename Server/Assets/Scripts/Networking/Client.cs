@@ -93,11 +93,6 @@ public class Client: MonoBehaviour
 
 		socket.Close();
 		handshakeDone = false;
-		return;
-		stream.BeginRead(Array.Empty<byte>(), 0, 0, result => {
-														socket.Close();
-														handshakeDone = false;
-													}, null);
 	}
 
 	// see if we get a closing handshake msg, if so send back a closing handshake

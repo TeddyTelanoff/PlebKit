@@ -32,5 +32,6 @@ public class PlayerQuiz: MonoBehaviour
 			Player.localPlayer.GetComponent<PlayerQuiz>().question.choices[answer],
 			updatedBait - Player.localPlayer.fish.bait);
 		Player.localPlayer.fish.bait = updatedBait;
+		Player.UpdateSupplyDisplay();
 	}
 }

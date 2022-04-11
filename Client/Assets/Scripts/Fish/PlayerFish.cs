@@ -1,3 +1,5 @@
+using System.Collections;
+
 using UnityEngine;
 
 public class PlayerFish: MonoBehaviour
@@ -10,8 +12,21 @@ public class PlayerFish: MonoBehaviour
 	}
 
 	public void GoFishing() {
-		SendDoFish();
+		if (bait <= 0)
+			return;
+		
+		IEnumerator HackySolution() {
+			SendDoFish();
+
+			yield return new WaitForFixedUpdate();
+			SendDoFish();
+
+			yield return new WaitForFixedUpdate();
+			SendDoFish();
+		}
+		
 		GameLogic.instance.fishScreen.gameObject.SetActive(true);
+		StartCoroutine(HackySolution());
 	}
 
 	[PacketHandler(ServerToClient.FishResult)]
@@ -19,6 +34,8 @@ public class PlayerFish: MonoBehaviour
 		int specieId = packet.GetInt();
 		Player.localPlayer.fish.fishes[specieId]++;
 		Player.localPlayer.fish.bait--;
+
+		Player.UpdateSupplyDisplay();
 		GameLogic.instance.fishScreen.DisplayResult(ref GameLogic.instance.fishSpecies[specieId]);
 	}
 

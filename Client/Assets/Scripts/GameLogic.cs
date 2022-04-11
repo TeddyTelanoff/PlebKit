@@ -12,6 +12,8 @@ public class GameLogic: MonoBehaviour
 	public static GameLogic instance;
 
 	public GameObject[] worlds;
+	public GameObject supplyPanel;
+	public Text supplyText;
 	
 	[Header("Activity")]
 	public string[] activityTexts;

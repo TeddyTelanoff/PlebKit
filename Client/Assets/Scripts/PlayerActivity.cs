@@ -9,6 +9,7 @@ public enum Activity: ushort
 	None,
 	Quiz,
 	Fish,
+	Sell,
 }
 
 public class PlayerActivity: MonoBehaviour
@@ -28,6 +29,7 @@ public class PlayerActivity: MonoBehaviour
 		activityDoers = new Dictionary<Activity, ActivityDoer> {
 			{ Activity.Quiz, SendDoQuiz },
 			{ Activity.Fish, DoFish },
+			{ Activity.Sell, SendSellFish },
 		};
 	}
 
@@ -50,6 +52,11 @@ public class PlayerActivity: MonoBehaviour
 
 	void DoFish() {
 		Player.localPlayer.fish.GoFishing();
+	}
+
+	void SendSellFish() {
+		Packet packet = Packet.Create(ClientToServer.SellFish);
+		Client.instance.Send(packet);
 	}
 
 	public void FinishActivity() {
