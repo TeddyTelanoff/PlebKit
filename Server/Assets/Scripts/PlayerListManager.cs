@@ -29,11 +29,10 @@ public class PlayerListManager: MonoBehaviour
 			if (!Server.instance.clients.ContainsKey(i))
 				continue;
 			
-			count++;
-
 			Player player = Server.instance.clients[i].player;
-			player.listItem.transform.localPosition = new Vector3(player.listItem.transform.localPosition.x, -30 * count,
+			player.listItem.transform.localPosition = new Vector3(player.listItem.transform.localPosition.x, -30 + -60 * count,
 																  player.listItem.transform.localPosition.z);
+			count++;
 		}
 	}
 }

@@ -23,6 +23,7 @@ public class Client: MonoBehaviour
 	public Packet receivedData;
 	public byte[] receiveBuffer;
 	public bool handshakeDone;
+	public bool disconnecting;
 
 	public void Connect(TcpClient client) {
 		socket = client;
@@ -91,8 +92,21 @@ public class Client: MonoBehaviour
 
 		stream.Write(frame, 0, frame.Length);
 
-		socket.Close();
-		handshakeDone = false;
+		stream.ReadAsync(receiveBuffer, 0, 0)
+			  .ContinueWith(task => {
+								socket.Close();
+								handshakeDone = false;
+								ThreadManager.ExecuteOnMainThread(() => {
+                                											  lock (Server.instance.availableClientIds)
+                                											  {
+                                												  Server.instance.clients.Remove(id);
+                                												  Server.instance.availableClientIds.Push(id);
+                                											  }
+
+																			  Destroy(gameObject);
+																			  print($"client {id} disconnected");
+                                										  });
+							});
 	}
 
 	// see if we get a closing handshake msg, if so send back a closing handshake
@@ -107,19 +121,14 @@ public class Client: MonoBehaviour
 	}
 
 	public void Disconnect() {
+		if (disconnecting)
+			return;
+		
+		disconnecting = true;
+		
 		SendDisconnect();
 		ClosingHandshake();
-
-		ThreadManager.ExecuteOnMainThread(() => {
-											  lock (Server.instance.availableClientIds)
-											  {
-												  Server.instance.clients.Remove(id);
-												  Server.instance.availableClientIds.Push(id);
-											  }
-
-											  Destroy(gameObject);
-										  });
-		print($"client {id} disconnected");
+		print($"client {id} disconnecting...");
 	}
 
 	void NotFixedUpdate() {
@@ -144,6 +153,9 @@ public class Client: MonoBehaviour
 	}
 
 	void ReceiveCallback(IAsyncResult result) {
+		if (disconnecting)
+			return;
+
 		try
 		{
 			int len = stream.EndRead(result);
@@ -266,6 +278,8 @@ public class Client: MonoBehaviour
 	}
 
 	public void Send(byte[] data) {
+		if (disconnecting)
+			return;
 		if (!socket.Connected)
 			Disconnect(); // todo this is a hacky solution
 		

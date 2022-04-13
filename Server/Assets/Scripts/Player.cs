@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
 	public float money;
 
+	public Upgrade upgrades;
+
 	void OnValidate() {
 		if (client == null)
 			client = GetComponentInParent<Client>();
@@ -64,6 +66,34 @@ public class Player : MonoBehaviour
 		Server.instance.Send(packet, client.id);
 	}
 
+	public void Upgrade(Upgrade upgrade) {
+		int val = (int) upgrade;
+		
+		int i;
+		for (i = 0; i < sizeof(Upgrade) * 8; i++)
+		{
+			if ((val & 1) == 1)
+			{
+				if (money >= GameLogic.instance.upgradeInfos[i].cost)
+				{
+					upgrades |= (Upgrade) (val << i);
+					money -= GameLogic.instance.upgradeInfos[i].cost;
+				}
+			}
+			
+			val >>= 1;
+		}
+
+		SendUpgradeInfo();
+	}
+
+	public void SendUpgradeInfo() {
+		Packet packet = Packet.Create(ServerToClient.UpgradeResult);
+		packet.AddInt((int) upgrades);
+		packet.AddFloat(money);
+		Server.instance.Send(packet, client.id);
+	}
+
 	[PacketHandler(ClientToServer.Quiz)]
 	static void Quiz(ushort clientId, Packet packet) {
 		if (Server.instance.clients.TryGetValue(clientId, out Client client))
@@ -89,5 +119,14 @@ public class Player : MonoBehaviour
 	static void SellFish(ushort clientId, Packet packet) {
 		if (Server.instance.clients.TryGetValue(clientId, out Client client))
 			client.player.fish.SellFish();
+	}
+
+	[PacketHandler(ClientToServer.Upgrade)]
+	static void OnUpgrade(ushort clientId, Packet packet) {
+		if (Server.instance.clients.TryGetValue(clientId, out Client client))
+		{
+			Upgrade upgrade = (Upgrade) packet.GetInt();
+			client.player.Upgrade(upgrade);
+		}
 	}
 }

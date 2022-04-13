@@ -91,24 +91,28 @@ public class Server: MonoBehaviour
 		print($"{username} joined!");
 		Player.Spawn(client, username);
 
-		Packet spawnPacket = MakeSpawnPacket(client, username, Vector3.zero, instance.clients[client].player.movement.speed);
+		Packet spawnPacket = MakeSpawnPacket(client, username, Vector3.zero, instance.clients[client].player.movement.speed, instance.clients[client].player.movement.fastSpeed);
 		instance.SendAll(spawnPacket, client);
 
 		foreach (Client otherClient in instance.clients.Values)
 		{
-			Packet otherSpawnPacket = MakeSpawnPacket(otherClient.id, otherClient.player.username,
-													  otherClient.player.transform.position,
-													  otherClient.player.movement.speed);
+			Packet otherSpawnPacket = MakeSpawnPacket(
+				otherClient.id, otherClient.player.username,
+				otherClient.player.transform.position,
+				otherClient.player.movement.speed,
+				otherClient.player.movement.fastSpeed
+			);
 			instance.Send(otherSpawnPacket, client);
 		}
 	}
 
-	static Packet MakeSpawnPacket(ushort id, string username, Vector3 where, float speed) {
+	static Packet MakeSpawnPacket(ushort id, string username, Vector3 where, float speed, float fastSpeed) {
 		Packet packet = Packet.Create(ServerToClient.Spawn);
 		packet.AddUShort(id);
 		packet.AddString(username);
 		packet.AddVector3(where);
 		packet.AddFloat(speed);
+		packet.AddFloat(fastSpeed);
 		packet.AddUShort((ushort) GameLogic.instance.spawnWorld);
 
 		return packet;

@@ -59,8 +59,12 @@ public class PlayerQuiz: MonoBehaviour
 
 	public void Guess(int guess) {
 		if (question.answer == guess)
+		{
 			player.fish.bait++;
-		else
+			if (player.upgrades.HasFlag(Upgrade.Bait))
+				player.fish.bait++;
+		}
+		else if (player.fish.bait > 0)
 			player.fish.bait--;
 
 		SendFeedback();

@@ -8,6 +8,7 @@ public class PlayerMovement: MonoBehaviour
 {
 	public Rigidbody rb;
 	public float speed;
+	public float fastSpeed;
 
 	void OnValidate() {
 		if (rb == null)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -10,17 +9,28 @@ public enum Activity: ushort
 	Quiz,
 	Fish,
 	Sell,
+	Upgrade,
 }
 
+[RequireComponent(typeof(Player))]
 public class PlayerActivity: MonoBehaviour
 {
 	public delegate void ActivityDoer();
 
 	public Dictionary<Activity, ActivityDoer> activityDoers;
 
+	public Player player;
+	
 	public GameObject activityButton;
 	public Text activityText;
 	public Activity activity;
+	
+	public UpgradeStation selectedUpgradeStation;
+
+	void OnValidate() {
+		if (player == null)
+			player = GetComponent<Player>();
+	}
 
 	void Awake() {
 		activityButton = GameLogic.instance.activityButton;
@@ -30,6 +40,7 @@ public class PlayerActivity: MonoBehaviour
 			{ Activity.Quiz, SendDoQuiz },
 			{ Activity.Fish, DoFish },
 			{ Activity.Sell, SendSellFish },
+			{ Activity.Upgrade, SendUpgrade },
 		};
 	}
 
@@ -40,9 +51,22 @@ public class PlayerActivity: MonoBehaviour
 		activityButton.SetActive(activity != Activity.None);
 	}
 
-	public void DoActivity() {
+	public void StartActivity() {
 		activityButton.SetActive(false);
 		activityDoers[activity]();
+
+		player.movement.enabled = false;
+	}
+
+	public void FinishActivity() {
+		activityButton.SetActive(activity != Activity.None);
+		player.movement.enabled = true;
+	}
+
+	public void FinishUpgrade(bool successful) {
+		FinishActivity();
+		if (successful)
+			selectedUpgradeStation.BoughtUpgrade();
 	}
 
 	public void SendDoQuiz() {
@@ -59,7 +83,9 @@ public class PlayerActivity: MonoBehaviour
 		Client.instance.Send(packet);
 	}
 
-	public void FinishActivity() {
-		activityButton.SetActive(activity != Activity.None);
+	void SendUpgrade() {
+		Packet packet = Packet.Create(ClientToServer.Upgrade);
+		packet.AddInt((int) selectedUpgradeStation.upgrade);
+		Client.instance.Send(packet);
 	}
 }

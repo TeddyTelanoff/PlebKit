@@ -9,6 +9,8 @@
 	QuestionFeedback,
 	InventoryUpdate,
 	FishResult,
+	UpgradeResult,
+	UpgradeInfo,
 }
 
 public enum ClientToServer: ushort
@@ -19,4 +21,6 @@ public enum ClientToServer: ushort
 	QuizGuess,
 	Fish,
 	SellFish,
+	Upgrade,
+	UpgradeInfo,
 }

@@ -24,7 +24,8 @@ public class Client : MonoBehaviour
 #endif
 
 	void OnApplicationQuit() {
-		socket.Close();
+	    if (socket != null)
+		    socket.Close();
 	}
 
 	public void Connect(string ip) {

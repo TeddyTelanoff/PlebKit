@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager: MonoBehaviour
+public class StartButton: MonoBehaviour
 {
 	public Button startButton;
+
+	void OnValidate() {
+		if (startButton == null)
+			startButton = GetComponent<Button>();
+	}
 
 	public void StartGame() {
 		startButton.interactable = false;

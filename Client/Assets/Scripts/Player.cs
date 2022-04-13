@@ -17,14 +17,18 @@ public class Player: MonoBehaviour
 	public World world;
 
 	public PlayerMovement movement;
+	public PlayerActivity activity;
 	public PlayerQuiz quiz;
 	public PlayerFish fish;
 
+	public Upgrade upgrades;
 	public float money;
 
 	void OnValidate() {
 		if (movement == null)
 			TryGetComponent(out movement);
+		if (activity == null)
+			TryGetComponent(out activity);
 		if (quiz == null)
 			TryGetComponent(out quiz);
 		if (fish == null)
@@ -34,8 +38,9 @@ public class Player: MonoBehaviour
 	void OnDestroy() {
 		if (isLocal)
 		{
-			GameLogic.instance.SwitchWorlds(World.Lobby);
+			GameLogic.instance.BackToLobby();
 			GameLogic.instance.supplyPanel.SetActive(false);
+			localPlayer = null;
 		}
 		players.Remove(id);
 	}
@@ -57,10 +62,11 @@ public class Player: MonoBehaviour
 		string username = packet.GetString();
 		Vector3 spawnpoint = packet.GetVector3();
 		float speed = packet.GetFloat();
+		float fastSpeed = packet.GetFloat();
 		World world = (World) packet.GetUShort();
 		print($"{username} spawned!, spawnpoint: {spawnpoint}");
 
-		SpawnPlayer(id, username, spawnpoint, speed, world);
+		SpawnPlayer(id, username, spawnpoint, speed, fastSpeed, world);
 	}
 
 	[PacketHandler(ServerToClient.Disconnect)]
@@ -97,9 +103,23 @@ public class Player: MonoBehaviour
 		localPlayer.fish.fishes = fishes;
 
 		UpdateSupplyDisplay();
+		localPlayer.activity.FinishActivity();
 	}
 
-	static void SpawnPlayer(ushort id, string username, Vector3 spawnpoint, float speed, World world) {
+	[PacketHandler(ServerToClient.UpgradeInfo)]
+	public static void UpgradeInfo(Packet packet) {
+		Upgrade oldUpgrades = localPlayer.upgrades;
+		localPlayer.upgrades = (Upgrade) packet.GetInt();
+
+		if (localPlayer.upgrades.HasFlag(Upgrade.Speed))
+			localPlayer.movement.speed = localPlayer.movement.fastSpeed;
+
+		localPlayer.money = packet.GetFloat();
+		UpdateSupplyDisplay();
+		localPlayer.activity.FinishUpgrade((oldUpgrades ^ localPlayer.upgrades) != 0);
+	}
+
+	static void SpawnPlayer(ushort id, string username, Vector3 spawnpoint, float speed, float fastSpeed, World world) {
 		Player player;
 		
 		if (id == Client.instance.clientId) // hey look it's me!
@@ -107,6 +127,7 @@ public class Player: MonoBehaviour
 			player = Instantiate(GameLogic.instance.localPlayerPrefab).GetComponent<Player>();
 			player.isLocal = true;
 			player.movement.speed = speed;
+			player.movement.fastSpeed = fastSpeed;
 
 			localPlayer = player;
 			GameLogic.instance.SwitchWorlds(world);

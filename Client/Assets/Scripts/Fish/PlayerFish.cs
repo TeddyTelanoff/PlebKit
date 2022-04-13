@@ -32,11 +32,12 @@ public class PlayerFish: MonoBehaviour
 	[PacketHandler(ServerToClient.FishResult)]
 	public static void FishResult(Packet packet) {
 		int specieId = packet.GetInt();
-		Player.localPlayer.fish.fishes[specieId]++;
+		Player.localPlayer.fish.fishes[specieId] = packet.GetInt();
 		Player.localPlayer.fish.bait--;
 
 		Player.UpdateSupplyDisplay();
 		GameLogic.instance.fishScreen.DisplayResult(ref GameLogic.instance.fishSpecies[specieId]);
+		Player.localPlayer.activity.FinishActivity();
 	}
 
 	void SendDoFish() {

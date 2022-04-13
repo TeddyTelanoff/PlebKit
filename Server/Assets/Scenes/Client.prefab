@@ -48,6 +48,7 @@ MonoBehaviour:
   player: {fileID: 4850888365506761930}
   receiveBuffer: 
   handshakeDone: 0
+  disconnecting: 0
 --- !u!1 &4850888365506761931
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +155,7 @@ MonoBehaviour:
   username: 
   world: 0
   money: 0
+  upgrades: 0
 --- !u!114 &2598448908102634073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1000
+  fastSpeed: 2000
 --- !u!114 &7018584666805474070
 MonoBehaviour:
   m_ObjectHideFlags: 0

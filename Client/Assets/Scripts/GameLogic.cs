@@ -14,7 +14,9 @@ public class GameLogic: MonoBehaviour
 	public GameObject[] worlds;
 	public GameObject supplyPanel;
 	public Text supplyText;
-	
+
+	public UpgradeStation[] upgradeStations;
+
 	[Header("Activity")]
 	public string[] activityTexts;
 	public GameObject activityButton;
@@ -35,15 +37,28 @@ public class GameLogic: MonoBehaviour
 	void Awake() {
 		instance = this;
 	}
-	
+
+#if UNITY_EDITOR
+	void Start() {
+		foreach (GameObject world in worlds)
+			world.SetActive(false);
+	}
+#endif
+
 	// todo more code
     public void SwitchWorlds(World newWorld) {
         worlds[(ushort) Player.localPlayer.world].SetActive(false);
         worlds[(ushort) newWorld].SetActive(true);
     }
 
+	public void BackToLobby() {
+		for (ushort i = 0; i < worlds.Length; i++)
+			if (worlds[i])
+				worlds[i].SetActive(i == (ushort) World.Lobby);
+	}
+
     public void DoActivity() =>
-        Player.localPlayer.GetComponent<PlayerActivity>().DoActivity();
+        Player.localPlayer.GetComponent<PlayerActivity>().StartActivity();
 
     public void QuizGuess(int guess) =>
         Player.localPlayer.GetComponent<PlayerQuiz>().Guess(guess);

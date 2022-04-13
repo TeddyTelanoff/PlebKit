@@ -30,6 +30,7 @@ public static class PacketHandling
 		{ ServerToClient.QuestionFeedback, PlayerQuiz.QuestionFeedback },
 		{ ServerToClient.FishResult, PlayerFish.FishResult },
 		{ ServerToClient.InventoryUpdate, Player.InventoryUpdate },
+		{ ServerToClient.UpgradeInfo, Player.UpgradeInfo },
 	};
 
 	// when will my reflection show....
