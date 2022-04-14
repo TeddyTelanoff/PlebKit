@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement: MonoBehaviour
 {
 	public float speed;
-	public float fastSpeed;
 
 	[PacketHandler(ClientToServer.Movement)]
 	static void Movement(ushort client, Packet packet) {

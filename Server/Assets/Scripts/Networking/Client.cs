@@ -290,7 +290,7 @@ public class Client: MonoBehaviour
 	// what's this "hard coding" ur speaking of??
 	byte[] MakeFrame(byte[] data) {
 		if (data.Length > 125)
-			throw new Exception("teddy code bad hehehehaw"); // if I get this exception, I need to impl fragmentation
+			throw new Exception($"teddy code bad hehehehaw {data.Length}"); // if I get this exception, I need to impl fragmentation
 		
 		byte[] bytes = new byte[data.Length + 2];
 		bytes[0] = 0b10000010; // fin bit + opcode 2

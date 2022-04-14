@@ -23,9 +23,6 @@ public class JoinScreen: MonoBehaviour
     public void BackToJoin() {
         usernameField.interactable = true;
         joinUI.SetActive(true);
-        
-        foreach (UpgradeStation upgradeStation in GameLogic.instance.upgradeStations)
-            upgradeStation.Reset();
     }
 
     public void SendJoin() {

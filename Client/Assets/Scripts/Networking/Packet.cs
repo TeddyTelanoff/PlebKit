@@ -128,14 +128,15 @@ public class Packet
 	}
 	
 	public byte GetByte() {
-		return buffer[readPos++];
+		return readBuffer[readPos++];
 	}
 	
 	public byte[] GetBytes(int count) {
-		byte[] bytes = buffer.GetRange(readPos, count).ToArray();
+		byte[] a = new byte[count];
+		Array.Copy(readBuffer, readPos, a, 0, count);
 		readPos += count;
 
-		return bytes;
+		return a;
 	}
 	
 	public short GetShort() {

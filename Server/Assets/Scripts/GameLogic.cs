@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public enum World: ushort
@@ -14,8 +17,28 @@ public class GameLogic: MonoBehaviour
     public Question[] questions;
     public FishSpecie[] fishSpecies;
     public float totalFishSpeciesChance;
-    public UpgradeInfo[] upgradeInfos;
+    
+    [Header("Upgrades")]
+    public UpgradeInfo[] speedUpgrades;
+    public UpgradeInfo[] baitUpgrades;
+    public UpgradeInfo[] fishUpgrades;
+    public UpgradeInfo[] valueUpgrades;
+    public UpgradeInfo[] backpackUpgrades;
+    public UpgradeInfo[] fishTimeUpgrades;
 
+    public UpgradeInfo[] GetUpgradeInfos(UpgradePath path) {
+        return path switch {
+            UpgradePath.Speed => speedUpgrades,
+            UpgradePath.Bait => baitUpgrades,
+            UpgradePath.Fish => fishUpgrades,
+            UpgradePath.Value => valueUpgrades,
+            UpgradePath.Backpack => backpackUpgrades,
+            UpgradePath.FishTime => fishTimeUpgrades,
+            
+            _ => throw new Exception("no upgrade path, mate"),
+        };
+    }
+    
     void OnValidate() {
         totalFishSpeciesChance = 0;
         foreach (FishSpecie fishSpecie in fishSpecies)
@@ -24,22 +47,5 @@ public class GameLogic: MonoBehaviour
 
     void Awake() {
         instance = this;
-    }
-
-    [PacketHandler(ClientToServer.UpgradeInfo)]
-    static void UpgradeInfo(ushort clientId, Packet packet) {
-        int val = packet.GetInt(); // <-- upgrade
-        
-        int i = 0;
-        for (; i < sizeof(Upgrade) * 8; i++)
-            if (val << i == 1)
-                break;
-        SendUpgradeInfo(i, clientId);
-    }
-
-    static void SendUpgradeInfo(int i, ushort clientId) {
-        Packet packet = Packet.Create(ServerToClient.UpgradeInfo);
-        packet.AddString(instance.upgradeInfos[i].name);
-        packet.AddFloat(instance.upgradeInfos[i].cost);
     }
 }

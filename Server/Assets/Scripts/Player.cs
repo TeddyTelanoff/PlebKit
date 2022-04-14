@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 using PacketExt;
 
 using UnityEngine;
@@ -19,7 +22,7 @@ public class Player : MonoBehaviour
 
 	public float money;
 
-	public Upgrade upgrades;
+	public Dictionary<UpgradePath, int> upgradeStatus;
 
 	void OnValidate() {
 		if (client == null)
@@ -33,6 +36,12 @@ public class Player : MonoBehaviour
 		
 		if (fish == null)
 			fish = GetComponent<PlayerFish>();
+	}
+
+	void Awake() {
+		upgradeStatus = new Dictionary<UpgradePath, int>();
+		for (byte i = 0; i < (byte) UpgradePath.Count; i++)
+			upgradeStatus.Add((UpgradePath) i, 0);
 	}
 
 	void OnDestroy() {
@@ -66,32 +75,99 @@ public class Player : MonoBehaviour
 		Server.instance.Send(packet, client.id);
 	}
 
-	public void Upgrade(Upgrade upgrade) {
-		int val = (int) upgrade;
-		
-		int i;
-		for (i = 0; i < sizeof(Upgrade) * 8; i++)
-		{
-			if ((val & 1) == 1)
-			{
-				if (money >= GameLogic.instance.upgradeInfos[i].cost)
-				{
-					upgrades |= (Upgrade) (val << i);
-					money -= GameLogic.instance.upgradeInfos[i].cost;
-				}
-			}
-			
-			val >>= 1;
-		}
+	public (UpgradeInfo info, bool max) GetUpgradeInfo(UpgradePath path) {
+		int idx = upgradeStatus[path];
+		UpgradeInfo[] infos = GameLogic.instance.GetUpgradeInfos(path);
 
-		SendUpgradeInfo();
+		if (idx >= infos.Length)
+			return (infos[infos.Length - 1], true);
+
+		return (infos[idx], false);
 	}
 
-	public void SendUpgradeInfo() {
+	void ApplyUpgrade(UpgradePath path, UpgradeInfo info) {
+		switch (path)
+		{
+		case UpgradePath.Speed:
+			movement.speed *= info.effect;
+			break;
+		case UpgradePath.Bait:
+			quiz.baitPerQuestion += (int) info.effect;
+			break;
+		case UpgradePath.Fish:
+			fish.luck *= info.effect;
+			break;
+		case UpgradePath.Value:
+			fish.value *= info.effect;
+			break;
+		case UpgradePath.Backpack:
+			fish.fishCapactiyPerSpecie += (int) info.effect;
+			break;
+		case UpgradePath.FishTime:
+			fish.waitTime *= info.effect;
+			break;
+		
+		default:
+			throw new Exception("ye, mate that upgrade path no exist");
+		}
+
+		upgradeStatus[path]++;
+		SendUpgradeResult();
+		SendUpgradeInfo(path);
+	}
+
+	void SendUpgradeResult() {
 		Packet packet = Packet.Create(ServerToClient.UpgradeResult);
-		packet.AddInt((int) upgrades);
 		packet.AddFloat(money);
+		packet.AddFloat(movement.speed);
+		// packet.AddInt(quiz.baitPerQuestion);
+		// packet.AddInt(fish.fishPerCatch);
+		// packet.AddFloat(fish.valueBonus);
+		// packet.AddInt(fish.fishCapactiyPerSpecie);
 		Server.instance.Send(packet, client.id);
+	}
+	
+	public void SendUpgradeInfo(UpgradePath path) {
+		Packet packet = Packet.Create(ServerToClient.UpgradeInfo);
+		(UpgradeInfo info, bool max) = GetUpgradeInfo(path);
+		if (max)
+		{
+			packet.AddByte((byte) path);
+			packet.AddBool(true);
+		}
+		else
+		{
+			packet.AddByte((byte) path);
+			packet.AddBool(false);
+			packet.AddFloat(info.cost);
+			packet.AddFloat(info.effect);
+
+			string op = path switch {
+				UpgradePath.Bait => $"+{info.effect}",
+				UpgradePath.Backpack => $"+{info.effect}",
+				_ => $"{info.effect}x",
+			};
+			
+			packet.AddString(op);
+		}
+
+		Server.instance.Send(packet, client.id);
+	}
+
+	public void Upgrade(UpgradePath path) {
+		(UpgradeInfo info, bool max) = GetUpgradeInfo(path);
+
+		if (max)
+			return; // nice try teddy
+		
+		if (money < info.cost)
+		{
+			SendUpgradeResult();
+			return;
+		}
+
+		money -= info.cost;
+		ApplyUpgrade(path, info);
 	}
 
 	[PacketHandler(ClientToServer.Quiz)]
@@ -125,8 +201,17 @@ public class Player : MonoBehaviour
 	static void OnUpgrade(ushort clientId, Packet packet) {
 		if (Server.instance.clients.TryGetValue(clientId, out Client client))
 		{
-			Upgrade upgrade = (Upgrade) packet.GetInt();
-			client.player.Upgrade(upgrade);
+			UpgradePath path = (UpgradePath) packet.GetByte();
+			client.player.Upgrade(path);
+		}
+	}
+
+	[PacketHandler(ClientToServer.UpgradeInfo)]
+	static void UpgradeInfo(ushort clientId, Packet packet) {
+		if (Server.instance.clients.TryGetValue(clientId, out Client client))
+		{
+			UpgradePath path = (UpgradePath) packet.GetByte();
+			client.player.SendUpgradeInfo(path);
 		}
 	}
 }

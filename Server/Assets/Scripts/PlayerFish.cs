@@ -8,13 +8,16 @@ public class PlayerFish: MonoBehaviour
 	public Player player;
 
 	public float waitTime;
-	
+
+	public float luck;
 	public int bait;
 	public int[] fishes;
-	public int fishCapactiyPerSpecie => player.upgrades.HasFlag(Upgrade.Backpack) ? 20 : 8;
+	public int fishCapactiyPerSpecie;
 
 	public bool fishing;
 
+	public float value;
+	
 	void OnValidate() {
 		if (player == null)
 			player = GetComponent<Player>();
@@ -28,8 +31,7 @@ public class PlayerFish: MonoBehaviour
 		for (int i = 0; i < fishes.Length; i++)
 		{
 			float gain = fishes[i] * GameLogic.instance.fishSpecies[i].value;
-			if (player.upgrades.HasFlag(Upgrade.Value))
-				gain *= 1.5f; // yes value op
+			gain *= value; // yes value op
 			player.money += gain;
 			fishes[i] = 0;
 		}
@@ -51,10 +53,15 @@ public class PlayerFish: MonoBehaviour
 			{
 				yield return new WaitForSeconds(waitTime);
 
-				float v = Random.Range(0, GameLogic.instance.totalFishSpeciesChance);
-				float a = 0;
+				int nSpecies = GameLogic.instance.fishSpecies.Length;
+				float totalChance = 0;
+				for (int j = 0; j < nSpecies; j++)
+					totalChance += GameLogic.instance.fishSpecies[j].chance * ((luck - 1) * (j / (float) nSpecies) + 1);
+
+				
+				float v = Random.Range(0, totalChance);
 				for (; i < GameLogic.instance.fishSpecies.Length; i++)
-					if (v < a + GameLogic.instance.fishSpecies[i].chance)
+					if (v < GameLogic.instance.fishSpecies[i].chance * ((luck - 1) * (i / (float) nSpecies) + 1))
 					{
 						if (fishes[i] < fishCapactiyPerSpecie)
 							fishes[i]++;
@@ -62,7 +69,7 @@ public class PlayerFish: MonoBehaviour
 						break;
 					}
 					else
-						a += GameLogic.instance.fishSpecies[i].chance;
+						v += GameLogic.instance.fishSpecies[i].chance * ((luck - 1) * (i / (float) nSpecies) + 1);
 
 				bait--;
 

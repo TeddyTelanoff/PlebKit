@@ -1196,12 +1196,166 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnWorld: 0
   questions:
-  - prompt: What killed Steve Jobs?
+  - prompt: Who is best Youtuber?
     choices:
-    - Ligma
-    - Who the hell is Steve Jobs?
-    - Unemployment
-    - My jokes
+    - Treidex
+    - BlahFromAbove
+    - Glitch Hacker
+    - ContrastXD
+    answer: 0
+  - prompt: Who should you sub to?
+    choices:
+    - Treidex
+    - All of the Above
+    - Glitch Hacker
+    - ContrastXD
+    answer: 1
+  - prompt: What did the fish say when he swam into a wall
+    choices:
+    - Dam
+    - Ouch
+    - That's Hard
+    - Fish don't speak bozo
+    answer: 0
+  - prompt: What do you call a can opener that doesn't work
+    choices:
+    - Can't Opener
+    - Emotional Damge
+    - Failure
+    - Jeff Bagelz
+    answer: 2
+  - prompt: What does a knock-knock joke deserve?
+    choices:
+    - '"no-bell" prize'
+    - Emotional Support
+    - Hate
+    - An Answer
+    answer: 3
+  - prompt: What's red and bad for you teeth?
+    choices:
+    - A Brick.
+    - Cheese
+    - Moonlite is Bald
+    - A Yellow Brick
+    answer: 0
+  - prompt: What kind of tea is hard to swallow?
+    choices:
+    - Reality
+    - Don't even think about it
+    - My c...
+    - Bri'ish Tea
+    answer: 0
+  - prompt: Why can't a nose be 12 inches long?
+    choices:
+    - It's not American
+    - He tells the truth
+    - I forgot.
+    - Then it'd be a meter
+    answer: 0
+  - prompt: How do I look?
+    choices:
+    - I'm Blind!
+    - With your eyes
+    - Ugly
+    - This video is sponsered by NordVPN...
+    answer: 1
+  - prompt: What kind of shorts do clouds wear?
+    choices:
+    - Drippy Shorts
+    - Raid Shadow Legends Shorts
+    - Youtube Shorts
+    - Longs
+    answer: 0
+  - prompt: Where do sheep get haircuts?
+    choices:
+    - Baa Baa Shops
+    - Keeps
+    - At home
+    - A Brick
+    answer: 0
+  - prompt: How do you make holy water?
+    choices:
+    - Make it subscribe to Treidex
+    - Boil the Hell out of it!
+    - Use a Sponge
+    - Jesus Spit
+    answer: 0
+  - prompt: When does a joke become a dad joke?
+    choices:
+    - When it Adopts a Child Joke
+    - You got the whole squad laughing
+    - It becomes apparent
+    - '*nervoues chuckles*'
+    answer: 0
+  - prompt: Why is Peter Pan always flying?
+    choices:
+    - He neverlands
+    - He a sigma male
+    - Pan is hot. Heat rises.
+    - The floor is still lava
+    answer: 0
+  - prompt: Why do fish live in saltwater
+    choices:
+    - They're salty
+    - Pepper makes them sneeze.
+    - They salty cuz they not subscribed to Treidex
+    - It tastes gud
+    answer: 0
+  - prompt: What do you call birds who stick together?
+    choices:
+    - vel-crows
+    - Friends
+    - Honey Lovers
+    - idk
+    answer: 0
+  - prompt: What do you call a factory that sells great products?
+    choices:
+    - Samsung
+    - Satisfactory
+    - Apple
+    - Sadfactory
+    answer: 0
+  - prompt: What do you call a farm that makes bad jokes?
+    choices:
+    - Corny
+    - Funny
+    - XP Farm
+    - Ned
+    answer: 0
+  - prompt: Who is bald?
+    choices:
+    - Moonlite
+    - Ur Mum
+    - Hoo? I hardly know him?
+    - wrong answer
+    answer: 0
+  - prompt: Take a wild guess.
+    choices:
+    - 
+    - 
+    - 
+    - 
+    answer: 0
+  - prompt: I believe in you :)
+    choices:
+    - Treidex
+    - Treidex
+    - Treidex
+    - Treidex
+    answer: 0
+  - prompt: Who good youtuber?
+    choices:
+    - Treidex
+    - not Treidex
+    - not Treidex
+    - not Treidex
+    answer: 0
+  - prompt: Tell me a joke.
+    choices:
+    - Moonlite is bald
+    - Balls
+    - no, YOU tell ME a joke.
+    - yo momma
     answer: 0
   fishSpecies:
   - value: 5
@@ -1213,12 +1367,46 @@ MonoBehaviour:
   - value: 15
     chance: 1
   totalFishSpeciesChance: 100
-  upgradeCosts:
-  - 250
-  - 88
-  - 50
-  - 10
-  - 30
+  speedUpgrades:
+  - cost: 60
+    effect: 1.3
+  - cost: 72
+    effect: 1.1
+  - cost: 105
+    effect: 1.2
+  baitUpgrades:
+  - cost: 200
+    effect: 1
+  fishUpgrades:
+  - cost: 60
+    effect: 1.2
+  - cost: 80
+    effect: 1.3
+  - cost: 150
+    effect: 1.69
+  valueUpgrades:
+  - cost: 50
+    effect: 1.3
+  - cost: 60
+    effect: 1.3
+  - cost: 70
+    effect: 1.3
+  backpackUpgrades:
+  - cost: 10
+    effect: 2
+  - cost: 30
+    effect: 10
+  - cost: 50
+    effect: 30
+  fishTimeUpgrades:
+  - cost: 10
+    effect: 0.75
+  - cost: 80
+    effect: 0.666
+  - cost: 60
+    effect: 0.5
+  - cost: 200
+    effect: 0
 --- !u!1 &1985856759
 GameObject:
   m_ObjectHideFlags: 0

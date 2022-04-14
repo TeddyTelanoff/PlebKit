@@ -15,7 +15,7 @@ public class GameLogic: MonoBehaviour
 	public GameObject supplyPanel;
 	public Text supplyText;
 
-	public UpgradeStation[] upgradeStations;
+	public GameObject upgradeScreen;
 
 	[Header("Activity")]
 	public string[] activityTexts;

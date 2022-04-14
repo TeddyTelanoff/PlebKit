@@ -24,8 +24,6 @@ public class PlayerActivity: MonoBehaviour
 	public GameObject activityButton;
 	public Text activityText;
 	public Activity activity;
-	
-	public UpgradeStation selectedUpgradeStation;
 
 	void OnValidate() {
 		if (player == null)
@@ -40,7 +38,7 @@ public class PlayerActivity: MonoBehaviour
 			{ Activity.Quiz, SendDoQuiz },
 			{ Activity.Fish, DoFish },
 			{ Activity.Sell, SendSellFish },
-			{ Activity.Upgrade, SendUpgrade },
+			{ Activity.Upgrade, OpenUpgradeScreen },
 		};
 	}
 
@@ -63,10 +61,8 @@ public class PlayerActivity: MonoBehaviour
 		player.movement.enabled = true;
 	}
 
-	public void FinishUpgrade(bool successful) {
+	public void FinishUpgrade() {
 		FinishActivity();
-		if (successful)
-			selectedUpgradeStation.BoughtUpgrade();
 	}
 
 	public void SendDoQuiz() {
@@ -83,9 +79,7 @@ public class PlayerActivity: MonoBehaviour
 		Client.instance.Send(packet);
 	}
 
-	void SendUpgrade() {
-		Packet packet = Packet.Create(ClientToServer.Upgrade);
-		packet.AddInt((int) selectedUpgradeStation.upgrade);
-		Client.instance.Send(packet);
+	void OpenUpgradeScreen() {
+		GameLogic.instance.upgradeScreen.SetActive(true);
 	}
 }

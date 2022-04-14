@@ -10,6 +10,7 @@
 	InventoryUpdate,
 	FishResult,
 	UpgradeInfo,
+	UpgradeResult,
 }
 
 public enum ClientToServer: ushort
@@ -21,4 +22,5 @@ public enum ClientToServer: ushort
 	Fish,
 	SellFish,
 	Upgrade,
+	UpgradeInfo,
 }

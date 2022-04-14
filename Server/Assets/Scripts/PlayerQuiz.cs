@@ -8,6 +8,8 @@ public class PlayerQuiz: MonoBehaviour
 	public Question question;
 	public Player player;
 
+	public int baitPerQuestion;
+
 	void OnValidate() {
 		if (player == null)
 			player = GetComponent<Player>();
@@ -59,11 +61,7 @@ public class PlayerQuiz: MonoBehaviour
 
 	public void Guess(int guess) {
 		if (question.answer == guess)
-		{
-			player.fish.bait++;
-			if (player.upgrades.HasFlag(Upgrade.Bait))
-				player.fish.bait++;
-		}
+			player.fish.bait += baitPerQuestion;
 		else if (player.fish.bait > 0)
 			player.fish.bait--;
 

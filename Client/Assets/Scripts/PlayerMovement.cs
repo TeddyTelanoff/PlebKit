@@ -8,7 +8,6 @@ public class PlayerMovement: MonoBehaviour
 {
 	public Rigidbody rb;
 	public float speed;
-	public float fastSpeed;
 
 	void OnValidate() {
 		if (rb == null)
@@ -20,6 +19,10 @@ public class PlayerMovement: MonoBehaviour
 		dir.x = Input.GetAxisRaw("Horizontal");
 		dir.z = Input.GetAxisRaw("Vertical");
 		Move(dir);
+		
+		if (transform.position.y <= -10)
+			transform.position = Vector3.zero;
+
 		SendPosition();
 	}
 

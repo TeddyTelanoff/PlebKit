@@ -1,12 +1,20 @@
 ﻿using System;
 
-[Flags]
-public enum Upgrade
+public enum UpgradePath: byte
 {
-	None = 0,
-	Speed = 1 << 0,
-	Bait = 1 << 1,
-	Fish = 1 << 2,
-	Value = 1 << 3,
-	Backpack = 1 << 4,
+	Speed,
+	Bait,
+	Fish,
+	Value,
+	Backpack,
+	FishTime,
+	
+	Count,
+}
+
+[Serializable]
+public struct UpgradeInfo
+{
+	public float cost;
+	public float effect;
 }

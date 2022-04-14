@@ -9,8 +9,8 @@
 	QuestionFeedback,
 	InventoryUpdate,
 	FishResult,
-	UpgradeResult,
 	UpgradeInfo,
+	UpgradeResult,
 }
 
 public enum ClientToServer: ushort

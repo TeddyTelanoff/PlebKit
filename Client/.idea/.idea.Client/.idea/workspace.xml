@@ -2,35 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37de6820-69b2-4655-a80f-1f5347d47a14" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/UpgradePath.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Grass.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Grass.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Pier.blend" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Pier.blend" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Fish/PlayerFish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Fish/PlayerFish.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameLogic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoinScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoinScreen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketHandling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketHandling.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/PacketIds.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerActivity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Upgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Upgrade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UpgradeStation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UpgradeStation.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scenes/Client.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scenes/Client.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/GameLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/GameLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/PacketHandling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/PacketHandling.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/PacketIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/PacketIds.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Server.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerFish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerFish.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerListManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerListManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerQuiz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerQuiz.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/StartButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/UIManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/StartButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Upgrade.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Upgrade.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/UpgradePath.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +102,7 @@
       <workItem from="1649702789745" duration="1000" />
       <workItem from="1649702820691" duration="1675000" />
       <workItem from="1649785975393" duration="6761000" />
-      <workItem from="1649878615146" duration="3170000" />
+      <workItem from="1649878615146" duration="5300000" />
     </task>
     <servers />
   </component>

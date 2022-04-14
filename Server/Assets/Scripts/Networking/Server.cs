@@ -70,9 +70,9 @@ public class Server: MonoBehaviour
 		tcpListener.Stop();
 	}
 
-	public void Send(Packet packet, ushort client) {
+	public void Send(Packet packet, ushort clientId) {
 		packet.Finish();
-		clients[client].Send(packet.readBuffer);
+		clients[clientId].Send(packet.readBuffer);
 	}
 
 	public void SendAll(Packet packet, ushort except = 0) {
@@ -83,36 +83,34 @@ public class Server: MonoBehaviour
 	}
 
 	[PacketHandler(ClientToServer.Join)]
-	static void PlayerJoined(ushort client, Packet packet) {
+	static void PlayerJoined(ushort clientId, Packet packet) {
 		string username = packet.GetString();
 		if (string.IsNullOrEmpty(username))
-			username = "Guest " + client;
+			username = "Guest " + clientId;
 			
 		print($"{username} joined!");
-		Player.Spawn(client, username);
+		Player.Spawn(clientId, username);
 
-		Packet spawnPacket = MakeSpawnPacket(client, username, Vector3.zero, instance.clients[client].player.movement.speed, instance.clients[client].player.movement.fastSpeed);
-		instance.SendAll(spawnPacket, client);
+		Packet spawnPacket = MakeSpawnPacket(clientId, username, Vector3.zero, instance.clients[clientId].player.movement.speed);
+		instance.SendAll(spawnPacket, clientId);
 
 		foreach (Client otherClient in instance.clients.Values)
 		{
 			Packet otherSpawnPacket = MakeSpawnPacket(
 				otherClient.id, otherClient.player.username,
 				otherClient.player.transform.position,
-				otherClient.player.movement.speed,
-				otherClient.player.movement.fastSpeed
+				otherClient.player.movement.speed
 			);
-			instance.Send(otherSpawnPacket, client);
+			instance.Send(otherSpawnPacket, clientId);
 		}
 	}
 
-	static Packet MakeSpawnPacket(ushort id, string username, Vector3 where, float speed, float fastSpeed) {
+	static Packet MakeSpawnPacket(ushort id, string username, Vector3 where, float speed) {
 		Packet packet = Packet.Create(ServerToClient.Spawn);
 		packet.AddUShort(id);
 		packet.AddString(username);
 		packet.AddVector3(where);
 		packet.AddFloat(speed);
-		packet.AddFloat(fastSpeed);
 		packet.AddUShort((ushort) GameLogic.instance.spawnWorld);
 
 		return packet;

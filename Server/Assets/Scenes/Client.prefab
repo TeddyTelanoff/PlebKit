@@ -155,7 +155,6 @@ MonoBehaviour:
   username: 
   world: 0
   money: 0
-  upgrades: 0
 --- !u!114 &2598448908102634073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1000
-  fastSpeed: 2000
 --- !u!114 &7018584666805474070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +185,7 @@ MonoBehaviour:
     choices: []
     answer: 0
   player: {fileID: 4850888365506761930}
+  baitPerQuestion: 1
 --- !u!114 &376254456005642323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,10 +199,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4850888365506761930}
-  waitTime: 1
+  waitTime: 2
+  luck: 1
   bait: 0
   fishes: 
+  fishCapactiyPerSpecie: 8
   fishing: 0
+  value: 1
 --- !u!136 &8499967974064494238
 CapsuleCollider:
   m_ObjectHideFlags: 0

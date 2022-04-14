@@ -138,8 +138,12 @@ MonoBehaviour:
   username: 
   isLocal: 0
   world: 0
+  camera: {fileID: 7329970136222760201}
   movement: {fileID: 4848282919399528104}
-  bait: 0
+  activity: {fileID: 65624032524236955}
+  quiz: {fileID: -8863237204915002832}
+  fish: {fileID: -630217535086142204}
+  money: 0
 --- !u!54 &5600933835624344046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -182,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6096339e868f034195972d89412e3f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 7630565876194306652}
   activityButton: {fileID: 0}
   activityText: {fileID: 0}
   activity: 0
