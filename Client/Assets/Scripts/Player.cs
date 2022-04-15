@@ -112,7 +112,6 @@ public class Player: MonoBehaviour
 		localPlayer.movement.speed = packet.GetFloat();
 		
 		UpdateSupplyDisplay();
-		localPlayer.activity.FinishUpgrade();
 	}
 
 	static void SpawnPlayer(ushort id, string username, Vector3 spawnpoint, float speed, World world) {

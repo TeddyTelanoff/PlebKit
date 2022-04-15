@@ -27,9 +27,13 @@ public class PlayerMovement: MonoBehaviour
 	}
 
 	void Move(Vector3 dir) {
-		dir *= speed;
+		// I like my code hard ;)
+		if (Player.localPlayer.world == World.Lobby)
+			dir *= 1883;
+		else
+			dir *= speed;
 		dir *= Time.deltaTime;
-		
+
 		rb.AddForce(dir);
 	}
 

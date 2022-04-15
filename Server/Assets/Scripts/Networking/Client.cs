@@ -289,14 +289,31 @@ public class Client: MonoBehaviour
 
 	// what's this "hard coding" ur speaking of??
 	byte[] MakeFrame(byte[] data) {
-		if (data.Length > 125)
-			throw new Exception($"teddy code bad hehehehaw {data.Length}"); // if I get this exception, I need to impl fragmentation
-		
-		byte[] bytes = new byte[data.Length + 2];
+		int lenlen = data.Length < 126 ? 1 : 3;
+		byte[] bytes = new byte[data.Length + lenlen + 1];
 		bytes[0] = 0b10000010; // fin bit + opcode 2
-		bytes[1] = (byte) data.Length;
+
+		if (data.Length < 126)
+		{
+			bytes[1] = (byte) data.Length;
+		}
+		else
+		{
+			bytes[1] = 126;
+			byte[] len = BitConverter.GetBytes((short) data.Length);
+			if (BitConverter.IsLittleEndian)
+			{
+				bytes[2] = len[1];
+				bytes[3] = len[0];
+			} else
+			{
+				bytes[2] = len[0];
+				bytes[3] = len[1];
+			}
+		}
 		
-		Array.Copy(data, 0, bytes, 2, data.Length);
+		
+		Array.Copy(data, 0, bytes, lenlen + 1, data.Length);
 
 		return bytes;
 	}

@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+
 using UnityEngine;
 
 public class PlayerListManager: MonoBehaviour
@@ -8,6 +11,10 @@ public class PlayerListManager: MonoBehaviour
 
 	void Awake() {
 		instance = this;
+	}
+
+	void Start() {
+		StartCoroutine(UpdateMoneyRoutine());
 	}
 
 	public void AddItem(Player player) {
@@ -23,16 +30,35 @@ public class PlayerListManager: MonoBehaviour
 	}
 
 	public void ReorderList() {
+		if (Server.instance.clients.Count <= 1)
+			return;
+		
 		int count = 0;
-		for (ushort i = 1; i <= Server.instance.maxClients; i++)
+		Client[] clients = new Client[Server.instance.clients.Count];
+		Server.instance.clients.Values.CopyTo(clients, 0);
+		Array.Sort(clients, ClientComparison);
+
+		foreach (Client client in clients)
 		{
-			if (!Server.instance.clients.ContainsKey(i))
-				continue;
-			
-			Player player = Server.instance.clients[i].player;
+			Player player = client.player;
 			player.listItem.transform.localPosition = new Vector3(player.listItem.transform.localPosition.x, -30 + -60 * count,
 																  player.listItem.transform.localPosition.z);
+
+			player.listItem.moneyText.text = $"${player.money:F2}";
 			count++;
+		}
+	}
+
+	int ClientComparison(Client x, Client y) {
+		return x.player.money.CompareTo(y.player.money);
+	}
+
+	IEnumerator UpdateMoneyRoutine() {
+		while (true)
+		{
+			ReorderList();
+
+			yield return new WaitForSeconds(10);
 		}
 	}
 }

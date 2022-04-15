@@ -13,6 +13,8 @@ public class GameLogic: MonoBehaviour
 {
     public static GameLogic instance;
 
+    public PlayerMenu playerMenu;
+    
     public World spawnWorld;
     public Question[] questions;
     public FishSpecie[] fishSpecies;

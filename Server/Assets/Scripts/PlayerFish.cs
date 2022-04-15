@@ -41,6 +41,9 @@ public class PlayerFish: MonoBehaviour
 
 	void SendFishResult(int fishSpecieId) {
 		Packet packet = Packet.Create(ServerToClient.FishResult);
+		if (fishSpecieId >= fishes.Length)
+			print(fishSpecieId);
+		
 		packet.AddInt(fishSpecieId);
 		packet.AddInt(fishes[fishSpecieId]);
 		Server.instance.Send(packet, player.client.id);
@@ -71,8 +74,10 @@ public class PlayerFish: MonoBehaviour
 					else
 						v += GameLogic.instance.fishSpecies[i].chance * ((luck - 1) * (i / (float) nSpecies) + 1);
 
-				bait--;
+				if (i >= GameLogic.instance.fishSpecies.Length)
+					i = GameLogic.instance.fishSpecies.Length - 1;
 
+				bait--;
 			}
 
 			fishing = false;
