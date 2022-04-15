@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-
-using PacketExt;
 
 using UnityEngine;
 
@@ -53,6 +50,7 @@ public class Client: MonoBehaviour
 		Array.Copy(receiveBuffer, data, len);
 
 		string str = Encoding.UTF8.GetString(data);
+		print(str);
 		OpeningHandshake(str);
 		handshakeDone = true;
 
