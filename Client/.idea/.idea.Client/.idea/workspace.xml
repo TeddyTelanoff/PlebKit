@@ -6,9 +6,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/.idea/.idea.Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/.idea.Server/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Server.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/Networking/Server.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerListManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerListManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Assets/Scripts/PlayerMenu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +92,7 @@
       <workItem from="1649878615146" duration="5300000" />
       <workItem from="1649964580482" duration="9528000" />
       <workItem from="1650052995571" duration="990000" />
+      <workItem from="1650057326494" duration="2339000" />
     </task>
     <servers />
   </component>

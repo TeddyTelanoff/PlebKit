@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 using PacketExt;
 
@@ -17,7 +19,7 @@ public class Server: MonoBehaviour
 	public ushort maxClients;
 	public int port;
 
-	public TcpListener tcpListener;
+	public HttpListener httpListener;
 
 	public Dictionary<ushort, Client> clients = new Dictionary<ushort, Client>();
 	public Stack<ushort> availableClientIds = new Stack<ushort>();
@@ -29,9 +31,11 @@ public class Server: MonoBehaviour
 	void Start() {
 		PacketHandling.MakeDictionary();
 
-		tcpListener = new TcpListener(IPAddress.Any, port);
-		tcpListener.Start();
-		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
+		httpListener = new HttpListener();
+		httpListener.Prefixes.Add($"http://*:{port}/");
+		httpListener.Start();
+
+		ConnectAsync();
 
 		// start from client id 1 -> maxClients
 		// (in a stack, you pop the last item you pushed)
@@ -41,33 +45,36 @@ public class Server: MonoBehaviour
 		print($"server active on port {port}");
 	}
 
-	void ConnectCallback(IAsyncResult result) {
-		TcpClient tcpClient = tcpListener.EndAcceptTcpClient(result);
-		tcpListener.BeginAcceptTcpClient(ConnectCallback, null);
-
-		print($"connection?");
-
-		lock (availableClientIds)
+	async Task ConnectAsync() {
+		while (Application.isPlaying)
 		{
-			if (availableClientIds.Count <= 0)
-				// todo respond with: server full
-				return;
+			HttpListenerContext ctx = await httpListener.GetContextAsync();
+			print($"connection?");
 			
-			ushort id = availableClientIds.Pop();
-			ThreadManager.ExecuteOnMainThread(() => {
-												  Client client = Instantiate(clientPrefab).GetComponent<Client>();
-												  client.id = id;
-												  clients.Add(id, client);
-												  client.Connect(tcpClient);
-											  });
+			print(ctx.Request.ContentLength64);
+
+			lock (availableClientIds)
+			{
+				if (availableClientIds.Count <= 0)
+					// todo respond with: server full
+					return;
+
+				ushort id = availableClientIds.Pop();
+				ThreadManager.ExecuteOnMainThread(() => {
+													  Client client = Instantiate(clientPrefab).GetComponent<Client>();
+													  client.id = id;
+													  clients.Add(id, client);
+													  client.ConnectAsync(ctx).Wait();
+												  });
+			}
 		}
 	}
 
 	void OnApplicationQuit() {
 		foreach (Client client in clients.Values)
-			client.Disconnect();
+			client.Disconnect("server close");
 		
-		tcpListener.Stop();
+		httpListener.Close();
 	}
 
 	public void Send(Packet packet, ushort clientId) {

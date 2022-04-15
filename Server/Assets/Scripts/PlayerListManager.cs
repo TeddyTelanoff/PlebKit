@@ -40,6 +40,9 @@ public class PlayerListManager: MonoBehaviour
 
 		foreach (Client client in clients)
 		{
+			if (client.player == null)
+				continue;
+			
 			Player player = client.player;
 			player.listItem.transform.localPosition = new Vector3(player.listItem.transform.localPosition.x, -30 + -60 * count,
 																  player.listItem.transform.localPosition.z);

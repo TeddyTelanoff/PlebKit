@@ -12,7 +12,7 @@ public class PlayerMenu: MonoBehaviour
 	}
 
 	public void Kick() {
-		player.client.Disconnect();
+		player.client.Disconnect("kicked");
 		gameObject.SetActive(false);
 	}
 }
